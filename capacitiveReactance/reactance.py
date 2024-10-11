@@ -125,7 +125,7 @@ def total_impedance_and_phase(frequency: float, inductance: float, capacitance: 
 
     return Z, phase_angle_degrees
 
-def main(randomize: bool = False):
+def main(randomize: bool = False, generator: function = None):
     """
     Example usage of the total_impedance_and_phase function.
     If 'randomize' is set to True, random values for the variables will be generated.
