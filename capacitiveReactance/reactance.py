@@ -139,7 +139,7 @@ def main(randomize: bool = False):
         frequency = random.uniform(50, 5000)         # Hertz (50 Hz to 5 kHz)
         inductance = random.uniform(1e-6, 1e0)      # Henrys (1 microhenry to 1 millihenry)
         capacitance = random.uniform(1e-12, 1e0)    # Farads (1 picofarad to 1 microfarad)
-        resistance = random.uniform(1, 1000)          # Ohms (1 to 100 ohms)
+        resistance = random.uniform(10, 1000)          # Ohms (1 to 100 ohms)
         length = random.uniform(0.1, 10000)             # Meters (0.1 to 10 meters)
         radius = random.uniform(0.0001, 1.0)        # Meters (0.1 mm to 10 mm)
 
