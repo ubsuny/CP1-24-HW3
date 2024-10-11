@@ -1,4 +1,4 @@
-# Reactance
+# Reactance in an RLC Circuit
 The opposition to a flow of alternating current in a circuit that arises due to
 the presence of inductors and capacitors. Though it only occurs in AC circuits,
 it is analogous to resistance in DC circuits.
@@ -59,3 +59,12 @@ Parasitic reactance can be inductive or capacitive depending on the system and
 its configuration. An interesting detail is that while normal (intentional)
 capacitive reactance is typically limited to capacitors, parasitic capacitance
 can arise nearly anywhere in a circuit if the conditions allow for it.
+
+# Impedance
+Based on the total impedance and resistance, the phase relationship can be
+inferred. If the impedance is much greater than the resistance, the circuit is dominated by reactance. If the resistance dominates, the circuit behaves more
+like a resistor (with less phase shift between voltage and current).
+
+Z = [R^2 + (X_L + X_L_wire - (X_C + X_C_wire))^2 ]^(1/2)
+
+##
