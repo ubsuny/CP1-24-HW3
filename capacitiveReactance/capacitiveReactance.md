@@ -13,6 +13,6 @@ Single wires do not typically exhibit capacitance, however [...] and so in certa
 other conductive components.
 
 ### How to Determine X_c:
--Start by estimating the parasitic capacitance C using knowledge of the system, its geometry, and its surroundings.
--Determine the operating frequency *f*
--Use [Eqn 1] to compute X_c for the segment/component.
+- Start by estimating the parasitic capacitance C using knowledge of the system, its geometry, and its surroundings.
+- Determine the operating frequency *f*
+- Use [Eqn 1] to compute X_c for the segment/component.
