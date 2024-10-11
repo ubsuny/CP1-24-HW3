@@ -1,1 +1,8 @@
-morewords
+import numpy as np
+
+def IRVthenextbit(funk,x)
+    while (len(x[0])-1)
+
+
+
+    list(filter(IRV('i',x,x+1),matrx))
