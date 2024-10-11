@@ -160,6 +160,9 @@ def main(randomize: bool = False):
         print(f"Wire Length: {length:.2f} m")
         print(f"Wire Radius: {radius:.4f} m")
 
+        print(20*"=")
+        print("Computed Values")
+        print(20*"=")
         # Calculate total impedance and phase angle
         total_Z, phase_angle = total_impedance_and_phase(frequency, inductance, capacitance, resistance, length, radius)
         print(f"Total impedance of the circuit: {total_Z:.2f} Ohms")
@@ -178,8 +181,10 @@ def main(randomize: bool = False):
 
 if __name__ == "__main__":
     # Change 'randomize' to True for random values
+    print(30*"-")
     print("Static Configuration:")
     main()
     print("\n")
+    print(30*"-")
     print("Randomized Configuration:")
     main(randomize=True)
