@@ -1,6 +1,7 @@
 import math
+import random
 
-# Define some relevant constants
+# Constants
 MU_0 = 4 * math.pi * 1e-7  # Permeability of free space (H/m)
 EPSILON_0 = 8.854e-12      # Permittivity of free space (F/m)
 
@@ -16,14 +17,10 @@ def inductive_reactance(frequency: float, inductance: float) -> float:
 
     Returns:
     float: The inductive reactance in Ohms (Ω).
-
-    Raises:
-    ValueError: If frequency or inductance is non-positive.
     """
     if frequency <= 0 or inductance <= 0:
         raise ValueError("Frequency and inductance must be positive values.")
 
-    # Calculate inductive reactance
     return 2 * math.pi * frequency * inductance
 
 def capacitive_reactance(frequency: float, capacitance: float) -> float:
@@ -38,14 +35,10 @@ def capacitive_reactance(frequency: float, capacitance: float) -> float:
 
     Returns:
     float: The capacitive reactance in Ohms (Ω).
-
-    Raises:
-    ValueError: If frequency or capacitance is non-positive.
     """
     if frequency <= 0 or capacitance <= 0:
         raise ValueError("Frequency and capacitance must be positive values.")
 
-    # Calculate capacitive reactance
     return 1 / (2 * math.pi * frequency * capacitance)
 
 def calculate_wire_inductance(length: float, radius: float) -> float:
@@ -84,23 +77,28 @@ def calculate_wire_capacitance(length: float, radius: float) -> float:
 
     return (2 * math.pi * EPSILON_0 * length) / math.log(2 * length / radius)
 
-def total_reactance_with_wire(frequency: float, inductance: float, capacitance: float, length: float, radius: float) -> float:
+def total_impedance_and_phase(frequency: float, inductance: float, capacitance: float, resistance: float, length: float, radius: float) -> (float, float):
     """
-    Calculate the total reactance of a circuit, including both the component and wire properties.
+    Calculate the total impedance (Z) and phase angle (φ) of a circuit, including resistance and wire properties.
 
-    Total reactance (X) is the difference between inductive reactance (X_L) and capacitive reactance (X_C):
-    X = (X_L + wire_inductive_reactance) - (X_C + wire_capacitive_reactance)
+    Z = sqrt(R^2 + (X_L + X_{L_wire} - (X_C + X_{C_wire}))^2)
+    φ = arctan(total reactance / resistance)
 
     Parameters:
     frequency (float): The frequency of the AC signal in Hertz (Hz).
     inductance (float): The inductance of the inductor in Henrys (H).
     capacitance (float): The capacitance of the capacitor in Farads (F).
+    resistance (float): The resistance of the resistor in Ohms (Ω).
     length (float): The length of the wire in meters.
     radius (float): The radius of the wire in meters.
 
     Returns:
-    float: The total reactance in Ohms (Ω).
+    float: The total impedance in Ohms (Ω).
+    float: The phase angle in degrees (°).
     """
+    if resistance < 0:
+        raise ValueError("Resistance must be non-negative.")
+
     # Calculate inductive and capacitive reactance for components
     X_L = inductive_reactance(frequency, inductance)
     X_C = capacitive_reactance(frequency, capacitance)
@@ -113,40 +111,75 @@ def total_reactance_with_wire(frequency: float, inductance: float, capacitance: 
     wire_X_L = inductive_reactance(frequency, wire_L)
     wire_X_C = capacitive_reactance(frequency, wire_C)
 
-    # Calculate total reactance including wire properties
-    total_X = (X_L + wire_X_L) - (X_C + wire_X_C)
-    return total_X
+    # Calculate total reactance (X = (X_L + X_{L_wire}) - (X_C + X_{C_wire}))
+    total_reactance = (X_L + wire_X_L) - (X_C + wire_X_C)
 
-def main():
-    """
-    Example usage of the total_reactance_with_wire function.
-    """
-    # Example parameters for components
-    frequency = 60.0  # Hertz (Hz), common AC line frequency
-    inductance = 0.01  # 10 millihenrys (H)
-    capacitance = 1e-6  # 1 microfarad (F)
+    # Calculate total impedance Z = sqrt(R^2 + total_reactance^2)
+    Z = math.sqrt(resistance**2 + total_reactance**2)
 
-    # Example wire properties
-    length = 1.0  # Length of the wire in meters
-    radius = 0.001  # Radius of the wire in meters (1 mm)
+    # Calculate phase angle φ = arctan(total_reactance / resistance)
+    phase_angle_radians = math.atan(total_reactance / resistance)
+    phase_angle_degrees = math.degrees(phase_angle_radians)
+
+    return Z, phase_angle_degrees
+
+def main(randomize: bool = False):
+    """
+    Example usage of the total_impedance_and_phase function.
+    If 'randomize' is set to True, random values for the variables will be generated.
+
+    Parameters:
+    randomize (bool): If True, random values will be used for the variables.
+    """
+    if randomize:
+        # Generate random values within reasonable physical ranges
+        frequency = random.uniform(50, 50000)         # Hertz (50 Hz to 5 kHz)
+        inductance = random.uniform(1e-6, 1e0)      # Henrys (1 microhenry to 1 millihenry)
+        capacitance = random.uniform(1e-12, 1e0)    # Farads (1 picofarad to 1 microfarad)
+        resistance = random.uniform(1, 1000)          # Ohms (1 to 100 ohms)
+        length = random.uniform(0.1, 1000)             # Meters (0.1 to 10 meters)
+        radius = random.uniform(0.0001, 1.0)        # Meters (0.1 mm to 10 mm)
+
+    else:
+        # Example fixed parameters
+        frequency = 60.0       # Hertz (Hz), common AC line frequency
+        inductance = 0.01      # Henrys (H)
+        capacitance = 1e-6     # Farads (F)
+        resistance = 10.0      # Ohms (Ω)
+        length = 1.0           # Meters
+        radius = 0.001         # Meters (1 mm)
 
     try:
-        # Calculate total reactance with wire properties
-        total_X = total_reactance_with_wire(frequency, inductance, capacitance, length, radius)
-        print(f"Total reactance of the circuit with wire properties: {total_X:.2f} Ohms")
+        # Print out the system values
+        print(30*"-")
+        print(f"System Values:")
+        print(f"Frequency: {frequency:.2f} Hz")
+        print(f"Inductance: {inductance:.6f} H")
+        print(f"Capacitance: {capacitance:.12f} F")
+        print(f"Resistance: {resistance:.2f} Ω")
+        print(f"Wire Length: {length:.2f} m")
+        print(f"Wire Radius: {radius:.4f} m")
 
-        # Check whether the reactance is inductive or capacitive
-        if total_X > 0:
-            print("The circuit is net inductive (inductive reactance is dominant).")
-            print("Current lags behind the voltage.")
-        elif total_X < 0:
-            print("The circuit is net capacitive (capacitive reactance is dominant).")
-            print("Current leads the voltage.")
+        # Calculate total impedance and phase angle
+        total_Z, phase_angle = total_impedance_and_phase(frequency, inductance, capacitance, resistance, length, radius)
+        print(f"Total impedance of the circuit: {total_Z:.2f} Ohms")
+        print(f"Phase angle: {phase_angle:.2f}°")
+
+        # Check whether the current lags or leads the voltage
+        if phase_angle > 0:
+            print("The current lags behind the voltage (inductive circuit).")
+        elif phase_angle < 0:
+            print("The current leads the voltage (capacitive circuit).")
         else:
-            print("The circuit is in resonance (inductive and capacitive reactances cancel each other).")
+            print("The current and voltage are in phase (purely resistive circuit).")
 
     except ValueError as e:
         print(f"Error: {e}")
 
 if __name__ == "__main__":
+    # Change 'randomize' to True for random values
+    print("Static Configuration:")
     main()
+    print("\n")
+    print("Randomized Configuration:")
+    main(randomize=True)
