@@ -60,7 +60,7 @@ its configuration. An interesting detail is that while normal (intentional)
 capacitive reactance is typically limited to capacitors, parasitic capacitance
 can arise nearly anywhere in a circuit if the conditions allow for it.
 
-# Impedance
+# Total Impedance and Phase
 Based on the total impedance and resistance, the phase relationship can be
 inferred. If the impedance is much greater than the resistance, the circuit is dominated by reactance. If the resistance dominates, the circuit behaves more
 like a resistor (with less phase shift between voltage and current).

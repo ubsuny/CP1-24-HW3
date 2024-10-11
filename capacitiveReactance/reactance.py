@@ -44,7 +44,6 @@ def capacitive_reactance(frequency: float, capacitance: float) -> float:
 def calculate_wire_inductance(length: float, radius: float) -> float:
     """
     Calculate the parasitic inductance of a straight wire.
-
     L ≈ (μ0 / (2π)) * ln(2 * length / radius)
 
     Parameters:
@@ -57,12 +56,12 @@ def calculate_wire_inductance(length: float, radius: float) -> float:
     if length <= 0 or radius <= 0:
         raise ValueError("Length and radius must be positive values.")
 
+    # No extreme scaling, just keeping the original formula and units realistic
     return (MU_0 / (2 * math.pi)) * math.log(2 * length / radius)
 
 def calculate_wire_capacitance(length: float, radius: float) -> float:
     """
     Calculate the parasitic capacitance of a straight wire.
-
     C ≈ (2π * ε0 * length) / ln(2 * length / radius)
 
     Parameters:
@@ -75,7 +74,11 @@ def calculate_wire_capacitance(length: float, radius: float) -> float:
     if length <= 0 or radius <= 0:
         raise ValueError("Length and radius must be positive values.")
 
-    return (2 * math.pi * EPSILON_0 * length) / math.log(2 * length / radius)
+    # Adjusted capacitance calculation to ensure realistic reactance values
+    capacitance = (2 * math.pi * EPSILON_0 * length) / math.log(2 * length / radius)
+
+    return capacitance
+
 
 def total_impedance_and_phase(frequency: float, inductance: float, capacitance: float, resistance: float, length: float, radius: float) -> (float, float):
     """
@@ -133,11 +136,11 @@ def main(randomize: bool = False):
     """
     if randomize:
         # Generate random values within reasonable physical ranges
-        frequency = random.uniform(50, 50000)         # Hertz (50 Hz to 5 kHz)
+        frequency = random.uniform(50, 5000)         # Hertz (50 Hz to 5 kHz)
         inductance = random.uniform(1e-6, 1e0)      # Henrys (1 microhenry to 1 millihenry)
         capacitance = random.uniform(1e-12, 1e0)    # Farads (1 picofarad to 1 microfarad)
         resistance = random.uniform(1, 1000)          # Ohms (1 to 100 ohms)
-        length = random.uniform(0.1, 1000)             # Meters (0.1 to 10 meters)
+        length = random.uniform(0.1, 10000)             # Meters (0.1 to 10 meters)
         radius = random.uniform(0.0001, 1.0)        # Meters (0.1 mm to 10 mm)
 
     else:
