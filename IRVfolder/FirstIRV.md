@@ -19,3 +19,6 @@ def IRV(i, r, v):
         print ("Your voltage is",mult(i,r))
         return mult(i,r)
 
+
+def testfunk(x, y):
+    return x+y
