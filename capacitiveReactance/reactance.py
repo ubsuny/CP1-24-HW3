@@ -79,7 +79,6 @@ def calculate_wire_capacitance(length: float, radius: float) -> float:
 
     return capacitance
 
-
 def total_impedance_and_phase(frequency: float, inductance: float, capacitance: float, resistance: float, length: float, radius: float) -> (float, float):
     """
     Calculate the total impedance (Z) and phase angle (φ) of a circuit, including resistance and wire properties.

@@ -6,7 +6,6 @@ class TestImpedanceCalculations(unittest.TestCase):
     """
     Unit tests for impedance, reactance, and phase angle calculations.
     """
-
     def test_inductive_reactance(self):
         """
         Test the inductive reactance calculation for a known frequency and inductance.
@@ -92,8 +91,6 @@ class TestImpedanceCalculations(unittest.TestCase):
         # Assert that computed and expected values match
         self.assertAlmostEqual(total_Z, expected_Z, places=6)
         self.assertAlmostEqual(phase_angle, expected_phase_angle, places=6)
-
-
 
     def test_invalid_resistance(self):
         """
