@@ -6,7 +6,6 @@ If you follow this simple guide you too can be submitting Grade A pull requests 
 To ensure that your pull request is a real winner make sure it includes the following:
   - A ledgible title that describes what is contained withing the pull request.
   - A ledible description that goes into more details than your title what each file contained within the request is and does.
-  - An @ mention to the assigned reviewer to make sure they are aware that they are supposed to review your request.
   - A reference to any currently open issues that pertain to your pull request.
   - And make sure to label and add a milestone to your pull request.
 
