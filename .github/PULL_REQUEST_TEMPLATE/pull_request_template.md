@@ -24,3 +24,7 @@ With this you now have the makings of a solid and respectable pull request.
 So get out there champ and start submitting **TODAY**.
 
 *Any distress or bodily harm that may come as a result of the reviewing process or by the maintainer are not the responsibility of said reviewers and maintainers.*
+
+So as the first task for a successful pullrequest is: 
+
+**remove now this template text and write a good desription what your pull request is about in its place**
