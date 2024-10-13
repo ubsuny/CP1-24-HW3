@@ -5,188 +5,162 @@ import random
 MU_0 = 4 * math.pi * 1e-7  # Permeability of free space (H/m)
 EPSILON_0 = 8.854e-12      # Permittivity of free space (F/m)
 
-def inductive_reactance(frequency: float, inductance: float) -> float:
+def inductive_reactance(frequency, inductance):
     """
     Calculate the inductive reactance (X_L) for a given inductor or wire's inductive property.
-
-    X_L = 2 * pi * f * L
-
-    Parameters:
-    frequency (float): The frequency of the AC signal in Hertz (Hz).
-    inductance (float): The inductance of the inductor in Henrys (H).
-
-    Returns:
-    float: The inductive reactance in Ohms (Ω).
+    If frequency is zero, inductive reactance is zero.
     """
-    if frequency <= 0 or inductance <= 0:
-        raise ValueError("Frequency and inductance must be positive values.")
+    if frequency == 0:    # If frequency is 0
+        return 0          # don't divide by it, just return 0
+    reactance = 2 * math.pi * frequency * inductance
+    return reactance
 
-    return 2 * math.pi * frequency * inductance
-
-def capacitive_reactance(frequency: float, capacitance: float) -> float:
+def capacitive_reactance(frequency, capacitance):
     """
     Calculate the capacitive reactance (X_C) for a given capacitor or wire's capacitive property.
-
-    X_C = 1 / (2 * pi * f * C)
-
-    Parameters:
-    frequency (float): The frequency of the AC signal in Hertz (Hz).
-    capacitance (float): The capacitance of the capacitor in Farads (F).
-
-    Returns:
-    float: The capacitive reactance in Ohms (Ω).
+    If frequency is zero, capacitive reactance is considered infinite.
     """
-    if frequency <= 0 or capacitance <= 0:
-        raise ValueError("Frequency and capacitance must be positive values.")
+    if frequency == 0:       # If frequency is 0
+        return float('inf')  # don't divide by it, just return 0
+    reactance = 1 / (2 * math.pi * frequency * capacitance) # compute reactance
+    return reactance                                        # and return it
 
-    return 1 / (2 * math.pi * frequency * capacitance)
-
-def calculate_wire_inductance(length: float, radius: float) -> float:
+def calculate_wire_inductance(length, radius):
     """
     Calculate the parasitic inductance of a straight wire.
-    L ≈ (μ0 / (2π)) * ln(2 * length / radius)
-
-    Parameters:
-    length (float): The length of the wire in meters.
-    radius (float): The radius of the wire in meters.
-
-    Returns:
-    float: The parasitic inductance in Henrys (H).
     """
-    if length <= 0 or radius <= 0:
-        raise ValueError("Length and radius must be positive values.")
+    # compute the inductance for this wire segment
+    inductance = (MU_0 / (2 * math.pi)) * math.log(2 * length / radius)
+    return inductance
 
-    # No extreme scaling, just keeping the original formula and units realistic
-    return (MU_0 / (2 * math.pi)) * math.log(2 * length / radius)
-
-def calculate_wire_capacitance(length: float, radius: float) -> float:
+def calculate_wire_capacitance(length, radius):
     """
     Calculate the parasitic capacitance of a straight wire.
-    C ≈ (2π * ε0 * length) / ln(2 * length / radius)
-
-    Parameters:
-    length (float): The length of the wire in meters.
-    radius (float): The radius of the wire in meters.
-
-    Returns:
-    float: The parasitic capacitance in Farads (F).
     """
-    if length <= 0 or radius <= 0:
-        raise ValueError("Length and radius must be positive values.")
-
-    # Adjusted capacitance calculation to ensure realistic reactance values
     capacitance = (2 * math.pi * EPSILON_0 * length) / math.log(2 * length / radius)
-
     return capacitance
 
-def total_impedance_and_phase(frequency: float, inductance: float, capacitance: float, resistance: float, length: float, radius: float) -> (float, float):
+def total_impedance_and_phase(frequency, inductance, capacitance, resistance, length, radius):
     """
     Calculate the total impedance (Z) and phase angle (φ) of a circuit, including resistance and wire properties.
-
-    Z = sqrt(R^2 + (X_L + X_{L_wire} - (X_C + X_{C_wire}))^2)
-    φ = arctan(total reactance / resistance)
-
-    Parameters:
-    frequency (float): The frequency of the AC signal in Hertz (Hz).
-    inductance (float): The inductance of the inductor in Henrys (H).
-    capacitance (float): The capacitance of the capacitor in Farads (F).
-    resistance (float): The resistance of the resistor in Ohms (Ω).
-    length (float): The length of the wire in meters.
-    radius (float): The radius of the wire in meters.
-
-    Returns:
-    float: The total impedance in Ohms (Ω).
-    float: The phase angle in degrees (°).
     """
-    if resistance < 0:
-        raise ValueError("Resistance must be non-negative.")
-
-    # Calculate inductive and capacitive reactance for components
+    # Calculate component inductive and capacitive reactance
     X_L = inductive_reactance(frequency, inductance)
     X_C = capacitive_reactance(frequency, capacitance)
 
-    # Calculate parasitic inductance and capacitance for the wire
+    # Calculate wire parasitic inductance and capacitance
     wire_L = calculate_wire_inductance(length, radius)
     wire_C = calculate_wire_capacitance(length, radius)
 
-    # Calculate reactance due to wire properties
+    # Calculate parasitic reactance for the wire
     wire_X_L = inductive_reactance(frequency, wire_L)
     wire_X_C = capacitive_reactance(frequency, wire_C)
 
-    # Calculate total reactance (X = (X_L + X_{L_wire}) - (X_C + X_{C_wire}))
+    # Total reactance is the sum of inductive reactance (including wire) minus capacitive reactance (including wire)
     total_reactance = (X_L + wire_X_L) - (X_C + wire_X_C)
 
-    # Calculate total impedance Z = sqrt(R^2 + total_reactance^2)
-    Z = math.sqrt(resistance**2 + total_reactance**2)
+    # Total impedance calculation
+    total_impedance = math.sqrt(resistance**2 + total_reactance**2)
 
-    # Calculate phase angle φ = arctan(total_reactance / resistance)
+    # Phase angle calculation
     phase_angle_radians = math.atan(total_reactance / resistance)
     phase_angle_degrees = math.degrees(phase_angle_radians)
 
-    return Z, phase_angle_degrees
+    return total_impedance, phase_angle_degrees
 
-def main(randomize: bool = False, generator_dict: dict  = None):
+def compute_segments(generator_dict, num_segments):
+    """
+    Compute the impedance and phase angle for a series of segments along a wire.
+    Store the computed values in lists for later plotting.
+    """
+    impedance_list = []
+    phase_angle_list = []
+
+    # use an iterate over each segment
+    for i in range(num_segments):
+
+
+        # print lambda functions and their computed values for this segment
+        print(f"Segment {i+1}:")                        # print the segment number
+        for key, func in generator_dict.items():        # use a dict comprehension
+            value = func(i)                             # get a value from the lambda function
+            print(f"  {key}: {value}")                  # print the key and value
+
+        # Calculate the current length for this segment using the lambda function for length
+        # current_length refers to the length of current segment of wire
+        current_length = generator_dict["length"](i)
+
+        # Call total_impedance_and_phase for each segment using the generator functions
+        total_Z, phase_angle = total_impedance_and_phase(
+            generator_dict["frequency"](i),
+            generator_dict["inductance"](i),
+            generator_dict["capacitance"](i),
+            generator_dict["resistance"](i),
+            current_length,
+            generator_dict["radius"](i)
+        )
+
+        # Append the results to the lists
+        impedance_list.append(total_Z)
+        phase_angle_list.append(phase_angle)
+
+    # return the two lists
+    return impedance_list, phase_angle_list
+
+def main(randomize=False, num_segments=10, dynamic=False):
     """
     Example usage of the total_impedance_and_phase function.
+
     If 'randomize' is set to True, random values for the variables will be generated.
+    Compute values for multiple segments along the wire.
 
-    Parameters:
-    randomize (bool): If True, random values will be used for the variables.
+    If 'dynamic' is True, the values will be generated as functions of the segment index (i).
     """
-    if randomize:
-        # Generate random values within reasonable physical ranges
-        frequency = random.uniform(50, 5000)         # Hertz (50 Hz to 5 kHz)
-        inductance = random.uniform(1e-6, 1e0)      # Henrys (1 microhenry to 1 millihenry)
-        capacitance = random.uniform(1e-12, 1e0)    # Farads (1 picofarad to 1 microfarad)
-        resistance = random.uniform(10, 1000)          # Ohms (1 to 100 ohms)
-        length = random.uniform(0.1, 10000)             # Meters (0.1 to 10 meters)
-        radius = random.uniform(0.0001, 1.0)        # Meters (0.1 mm to 10 mm)
-
+    # Dynamic behavior with lambda functions based on segment index (i)
+    if dynamic:
+        generator_dict = {
+            "frequency": lambda i: 50 + i**2,  # Frequency increases as i^2
+            "inductance": lambda i: 0.01 + 0.0001 * i,  # Inductance changes linearly with i
+            "capacitance": lambda i: 1e-6 + 1e-12 * i**2,  # Capacitance grows with i^2
+            "resistance": lambda i: 10 + 0.1 * i,  # Resistance increases linearly
+            "length": lambda i: 1.0 + 0.1 * i,  # Length changes linearly with i
+            "radius": lambda i: 0.001 + 1e-5 * i  # Radius increases linearly
+        }
+    # Random behavior with random values for each segment
+    elif randomize:
+        generator_dict = {
+            "frequency": lambda i: random.uniform(50, 5000),
+            "inductance": lambda i: random.uniform(1e-6, 1e0),
+            "capacitance": lambda i: random.uniform(1e-12, 1e0),
+            "resistance": lambda i: random.uniform(1, 1000),
+            "length": lambda i: random.uniform(0.1, 10),  # Now uses 'i' if dynamic
+            "radius": lambda i: random.uniform(0.0001, 0.01)
+        }
+    # Static configuration with fixed values for all segments
     else:
-        # Example fixed parameters
-        frequency = 60.0       # Hertz (Hz), common AC line frequency
-        inductance = 0.01      # Henrys (H)
-        capacitance = 1e-6     # Farads (F)
-        resistance = 10.0      # Ohms (Ω)
-        length = 1.0           # Meters
-        radius = 0.001         # Meters (1 mm)
+        generator_dict = {
+            "frequency": lambda i: 60.0,
+            "inductance": lambda i: 0.01,
+            "capacitance": lambda i: 1e-6,
+            "resistance": lambda i: 10.0,
+            "length": lambda i: 1.0,  # Fetch constant length
+            "radius": lambda i: 0.001
+        }
 
-    try:
-        # Print out the system values
-        print(30*"-")
-        print(f"System Values:")
-        print(f"Frequency: {frequency:.2f} Hz")
-        print(f"Inductance: {inductance:.6f} H")
-        print(f"Capacitance: {capacitance:.12f} F")
-        print(f"Resistance: {resistance:.2f} Ω")
-        print(f"Wire Length: {length:.2f} m")
-        print(f"Wire Radius: {radius:.4f} m")
+    # Compute the impedance and phase angle for each segment
+    impedance_list, phase_angle_list = compute_segments(generator_dict, num_segments)
 
-        print(20*"=")
-        print("Computed Values")
-        print(20*"=")
-        # Calculate total impedance and phase angle
-        total_Z, phase_angle = total_impedance_and_phase(frequency, inductance, capacitance, resistance, length, radius)
-        print(f"Total impedance of the circuit: {total_Z:.2f} Ohms")
-        print(f"Phase angle: {phase_angle:.2f}°")
-
-        # Check whether the current lags or leads the voltage
-        if phase_angle > 0:
-            print("The current lags behind the voltage (inductive circuit).")
-        elif phase_angle < 0:
-            print("The current leads the voltage (capacitive circuit).")
-        else:
-            print("The current and voltage are in phase (purely resistive circuit).")
-
-    except ValueError as e:
-        print(f"Error: {e}")
+    # Print the computed results for each segment
+    print("Computed Impedance and Phase Angle for each segment:")
+    for i, (impedance, phase_angle) in enumerate(zip(impedance_list, phase_angle_list)):
+        print(f"Segment {i+1}: Impedance = {impedance:.2f} Ohms, Phase Angle = {phase_angle:.2f}°")
 
 if __name__ == "__main__":
-    # Change 'randomize' to True for random values
-    print(30*"-")
-    print("Static Configuration:")
-    main()
-    print("\n")
-    print(30*"-")
-    print("Randomized Configuration:")
-    main(randomize=True)
+    # Static configuration
+    main(num_segments=10)
+    # Randomized configuration
+    print("\nRandomized Configuration:")
+    main(randomize=True, num_segments=10)
+    # Dynamic configuration
+    print("\nDynamic Configuration:")
+    main(dynamic=True, num_segments=10)
