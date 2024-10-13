@@ -60,22 +60,12 @@ capacitive reactance is typically limited to capacitors, parasitic capacitance
 can arise nearly anywhere in a circuit if the conditions allow for it.
 
 ### Parasitic Capacitance
-Parasitic capacitance arises from unintended capacitance between components or wiring in a circuit.
-
-For example, if the parasitic capacitance is estimated to be C_parasitic = 2 pF (picofarads) and the frequency *f* is 1 MHz (1,000,000 Hz), the parasitic capacitive reactance is:
-\[
-X_{C\_parasitic} = \frac{1}{2 \pi \times 1,000,000 \times 2 \times 10^{-12}} = 79.58 \, \text{M}\Omega
-\]
-This shows that at very high frequencies, even small parasitic capacitances can have significant effects.
+Parasitic capacitance arises from unintended capacitance between components or wiring in a circuit. At very high frequencies, even small parasitic capacitances can have significant effects.
 
 ### Parasitic Inductance
 Parasitic inductance occurs due to unintended inductance from components or wires, which can oppose changes in current.
 
-For example, if a wire has a parasitic inductance of L_parasitic = 10 nH (nanohenries) and the frequency *f* is 1 MHz, the parasitic inductive reactance is:
-\[
-X_{L\_parasitic} = 2 \pi \times 1,000,000 \times 10 \times 10^{-9} = 62.83 \, \Omega
-\]
-At high frequencies, parasitic inductance can become a significant factor in the circuit.
+For example, if a wire has a parasitic inductance of L_parasitic = 10 nH (nanohenries) and the frequency *f* is 1 MHz, the parasitic inductive reactance is: X_L_parasitic = 2 (pi)(1,000,000)(10E9) = 62.83 Ohms At high frequencies, parasitic inductance can become a significant factor in the circuit.
 
 # Total Impedance and Phase
 Based on the total impedance and resistance, the phase relationship can be
