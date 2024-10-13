@@ -167,12 +167,12 @@ def main(randomize=False, num_segments=10, dynamic=False):
     # Static configuration with fixed values for all segments
     else:
         generator_dict = {
-            "frequency": 60.0,
-            "inductance": 0.01,
-            "capacitance": 1e-6,
-            "resistance": 10.0,
-            "length": 1.0,
-            "radius": 0.001
+            "frequency": lambda i: 60.0,
+            "inductance": lambda i: 0.01,
+            "capacitance": lambda i: 1e-6,
+            "resistance": lambda i: 10.0,
+            "length": lambda i: 1.0,  # Fetch constant length
+            "radius": lambda i: 0.001
         }
 
     # Compute the impedance and phase angle for each segment
