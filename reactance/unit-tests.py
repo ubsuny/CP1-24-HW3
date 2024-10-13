@@ -23,20 +23,20 @@ from reactance import (
 )
 
 class TestReactanceCalculations(unittest.TestCase):
-"""
-TestReactanceCalculations
+    """
+    TestReactanceCalculations
 
-This class contains unit tests for various functions in the `reactance.py` module.
-It includes tests for:
-- Inductive reactance
-- Capacitive reactance
-- Parasitic reactance in wires (inductance and capacitance)
-- Total impedance and phase calculations
-- Edge cases like zero frequency and small inductance/capacitance
+    This class contains unit tests for various functions in the `reactance.py` module.
+    It includes tests for:
+    - Inductive reactance
+    - Capacitive reactance
+    - Parasitic reactance in wires (inductance and capacitance)
+    - Total impedance and phase calculations
+    - Edge cases like zero frequency and small inductance/capacitance
 
-Each test checks the accuracy of these calculations and ensures that the results
-fall within expected ranges.
-"""
+    Each test checks the accuracy of these calculations and ensures that the results
+    fall within expected ranges.
+    """
     def setUp(self):
         # Static configuration values for testing
         self.generator_dict_static = {
