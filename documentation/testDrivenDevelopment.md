@@ -11,7 +11,9 @@ The general idea is that by writing your tests first (and making sure that they 
 
 ### Example
 1 - First we write a test that describes a very basic use case.
-`import unittest
+
+```python
+import unittest
 
 class TestFreeFall(unittest.TestCase):
 
@@ -21,19 +23,21 @@ class TestFreeFall(unittest.TestCase):
         expected_distance = 0.5 * g * t ** 2  # The correct answer we expect
         result = falling_distance(t)
         self.assertAlmostEqual(result, expected_distance, places=2)
-`
+```
 
 2 - Next we run the test and make sure that it fails
 
 3 - Then we write the least amount of code needed to make the test pass
 
-`def falling_distance(t):
+```python
+def falling_distance(t):
     g = 9.81  # gravity (m/s^2)
     return 0.5 * g * t ** 2
-`
+```
 
 4 - Now we test it again to make sure that it passes.
 
+### Further Reading
 There is a ton of literature on the topic (especially if you are interested in web development) but for now I'll just link these:
 - [Simple Intro to TDD](https://www.freecodecamp.org/news/learning-to-test-with-python-997ace2d8abe/)
 - [TDD in Python: A Beginner's Guide](https://www.datacamp.com/tutorial/test-driven-development-in-python)
