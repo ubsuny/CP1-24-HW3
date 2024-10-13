@@ -5,6 +5,7 @@ import random
 MU_0 = 4 * math.pi * 1e-7  # Permeability of free space (H/m)
 EPSILON_0 = 8.854e-12      # Permittivity of free space (F/m)
 
+
 def inductive_reactance(frequency, inductance):
     """
     Calculate the inductive reactance (X_L) for a given inductor or wire's inductive property.
@@ -15,15 +16,17 @@ def inductive_reactance(frequency, inductance):
     reactance = 2 * math.pi * frequency * inductance
     return reactance
 
+
 def capacitive_reactance(frequency, capacitance):
     """
     Calculate the capacitive reactance (X_C) for a given capacitor or wire's capacitive property.
     If frequency is zero, capacitive reactance is considered infinite.
     """
-    if frequency == 0:       # If frequency is 0
-        return float('inf')  # don't divide by it, just return 0
-    reactance = 1 / (2 * math.pi * frequency * capacitance) # compute reactance
-    return reactance                                        # and return it
+    if frequency == 0:        # If frequency is 0
+        return float('inf')   # don't divide by it, just return 0
+    reactance = 1 / (2 * math.pi * frequency * capacitance)  # compute reactance
+    return reactance                                         # and return it
+
 
 def calculate_wire_inductance(length, radius):
     """
@@ -33,12 +36,14 @@ def calculate_wire_inductance(length, radius):
     inductance = (MU_0 / (2 * math.pi)) * math.log(2 * length / radius)
     return inductance
 
+
 def calculate_wire_capacitance(length, radius):
     """
     Calculate the parasitic capacitance of a straight wire.
     """
     capacitance = (2 * math.pi * EPSILON_0 * length) / math.log(2 * length / radius)
     return capacitance
+
 
 def total_impedance_and_phase(frequency, inductance, capacitance, resistance, length, radius):
     """
@@ -68,6 +73,7 @@ def total_impedance_and_phase(frequency, inductance, capacitance, resistance, le
 
     return total_impedance, phase_angle_degrees
 
+
 def compute_segments(generator_dict, num_segments):
     """
     Compute the impedance and phase angle for a series of segments along a wire.
@@ -78,7 +84,6 @@ def compute_segments(generator_dict, num_segments):
 
     # use an iterate over each segment
     for i in range(num_segments):
-
 
         # print lambda functions and their computed values for this segment
         print(f"Segment {i+1}:")                        # print the segment number
@@ -106,6 +111,7 @@ def compute_segments(generator_dict, num_segments):
 
     # return the two lists
     return impedance_list, phase_angle_list
+
 
 def main(randomize=False, num_segments=10, dynamic=False):
     """
@@ -154,6 +160,7 @@ def main(randomize=False, num_segments=10, dynamic=False):
     print("Computed Impedance and Phase Angle for each segment:")
     for i, (impedance, phase_angle) in enumerate(zip(impedance_list, phase_angle_list)):
         print(f"Segment {i+1}: Impedance = {impedance:.2f} Ohms, Phase Angle = {phase_angle:.2f}°")
+
 
 if __name__ == "__main__":
     # Static configuration
