@@ -1,3 +1,21 @@
+"""
+reactance.py
+
+This module provides functions to calculate the reactance of inductors and capacitors
+in AC circuits. The reactance is calculated based on the frequency of the alternating
+current and the inductance or capacitance of the components.
+
+Functions:
+- inductive_reactance(frequency, inductance): Calculates the inductive reactance (X_L)
+  based on the frequency of the AC signal and the inductance of the inductor.
+
+- capacitive_reactance(frequency, capacitance): Calculates the capacitive reactance (X_C)
+  based on the frequency of the AC signal and the capacitance of the capacitor.
+
+The module also handles parasitic reactance, combining inductive and capacitive
+components to compute the total reactance and impedance.
+"""
+
 import math
 import random
 
