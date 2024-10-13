@@ -8,8 +8,8 @@ circles.
 ![Screenshot 2024-10-13 164423](https://github.com/user-attachments/assets/25840c22-e22b-402f-86fb-426b548127b3)
 
 The strength of magnetic field, B, can be found at a distance r away from the wire by the equation below:
-$\displaystyle{B}=\frac{{\mu_{{0}}{I}}}{{{2}\pi{r}}}$
-where, $\displaystyle\mu_{{0}}$ is a constant known as permeability of free space and has the 
+$$\displaystyle{B}=\frac{{\mu_{{0}}{I}}}{{{2}\pi{r}}}$$
+where, $$\displaystyle\mu_{{0}}$ is a constant known as permeability of free space and has the 
 value $\displaystyle\mu_{{0}}={4}\pi\cdot{10}^{ -{{7}}}{T}\cdot\frac{m}{{A}}$
 It should be noted that the distance r must be measured perpendicular to the wire.
 So, The magnetic field produced by a long, straight wire consists of concentric circles centered around the wire, 
