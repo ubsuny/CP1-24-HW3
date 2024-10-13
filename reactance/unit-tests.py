@@ -1,10 +1,10 @@
 """
 unit-tests.py
 
-This module contains unit tests for validating the functions in the `reactance.py` module.
-It uses the `unittest` framework to check calculations related to inductive and capacitive
-reactance, parasitic inductance and capacitance in wires, and the total impedance and phase
-angle in AC circuits.
+This module contains unit tests for validating the functions in the
+`reactance.py` module.It uses the `unittest` framework to check calculations
+related to inductive and capacitive reactance, parasitic inductance and
+capacitance in wires, and the total impedance and phase angle in AC circuits.
 
 The tests cover:
 - Basic sanity checks for reactance and impedance.
@@ -26,7 +26,8 @@ class TestReactanceCalculations(unittest.TestCase):
     """
     TestReactanceCalculations
 
-    This class contains unit tests for various functions in the `reactance.py` module.
+    This class contains unit tests for various functions in the `reactance.py`
+    module.
     It includes tests for:
     - Inductive reactance
     - Capacitive reactance
@@ -34,7 +35,8 @@ class TestReactanceCalculations(unittest.TestCase):
     - Total impedance and phase calculations
     - Edge cases like zero frequency and small inductance/capacitance
 
-    Each test checks the accuracy of these calculations and ensures that the results
+    Each test checks the accuracy of these calculations and ensures that the
+    results
     fall within expected ranges.
     """
     def setUp(self):

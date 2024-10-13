@@ -1,16 +1,18 @@
 """
 reactance.py
 
-This module provides functions to calculate the reactance of inductors and capacitors
-in AC circuits. The reactance is calculated based on the frequency of the alternating
-current and the inductance or capacitance of the components.
+This module provides functions to calculate the reactance of inductors and
+capacitors in AC circuits. The reactance is calculated based on the frequency
+of the alternating current and the inductance or capacitance of the components.
 
 Functions:
-- inductive_reactance(frequency, inductance): Calculates the inductive reactance (X_L)
-  based on the frequency of the AC signal and the inductance of the inductor.
+- inductive_reactance(frequency, inductance): Calculates the inductive reactance
+  (X_L) based on the frequency of the AC signal and the inductance of the
+  inductor.
 
-- capacitive_reactance(frequency, capacitance): Calculates the capacitive reactance (X_C)
-  based on the frequency of the AC signal and the capacitance of the capacitor.
+- capacitive_reactance(frequency, capacitance): Calculates the capacitive
+  reactance (X_C) based on the frequency of the AC signal and the capacitance of
+  the capacitor.
 
 The module also handles parasitic reactance, combining inductive and capacitive
 components to compute the total reactance and impedance.
@@ -104,16 +106,17 @@ def compute_segments(generator_dict, num_segments):
     for i in range(num_segments):
 
         # print lambda functions and their computed values for this segment
-        print(f"Segment {i+1}:")                        # print the segment number
-        for key, func in generator_dict.items():        # use a dict comprehension
-            value = func(i)                             # get a value from the lambda function
-            print(f"  {key}: {value}")                  # print the key and value
+        print(f"Segment {i+1}:")                  # print the segment number
+        for key, func in generator_dict.items():  # use a dict comprehension
+            value = func(i)                       # get a value from the lambda
+            print(f"  {key}: {value}")            # print the key and value
 
-        # Calculate the current length for this segment using the lambda function for length
-        # current_length refers to the length of current segment of wire
+        # Calculate the current length for this segment
+        # using the lambda function for length.
+        # NOTE: current_length refers to the length of current segment of wire
         current_length = generator_dict["length"](i)
 
-        # Call total_impedance_and_phase for each segment using the generator functions
+        # Call total_impedance_and_phase for each segment using the generators
         total_Z, phase_angle = total_impedance_and_phase(
             generator_dict["frequency"](i),
             generator_dict["inductance"](i),
@@ -135,20 +138,21 @@ def main(randomize=False, num_segments=10, dynamic=False):
     """
     Example usage of the total_impedance_and_phase function.
 
-    If 'randomize' is set to True, random values for the variables will be generated.
-    Compute values for multiple segments along the wire.
+    If 'randomize' is set to True, random values for the variables will be
+    generated. Compute values for multiple segments along the wire.
 
-    If 'dynamic' is True, the values will be generated as functions of the segment index (i).
+    If 'dynamic' is True, the values will be generated as functions of the
+    segment index (i).
     """
     # Dynamic behavior with lambda functions based on segment index (i)
     if dynamic:
         generator_dict = {
-            "frequency": lambda i: 50 + i**2,  # Frequency increases as i^2
-            "inductance": lambda i: 0.01 + 0.0001 * i,  # Inductance changes linearly with i
-            "capacitance": lambda i: 1e-6 + 1e-12 * i**2,  # Capacitance grows with i^2
-            "resistance": lambda i: 10 + 0.1 * i,  # Resistance increases linearly
-            "length": lambda i: 1.0 + 0.1 * i,  # Length changes linearly with i
-            "radius": lambda i: 0.001 + 1e-5 * i  # Radius increases linearly
+            "frequency": lambda i: 50 + i**2,             # increases as i^2
+            "inductance": lambda i: 0.01 + 0.0001 * i,    # linearly with i
+            "capacitance": lambda i: 1e-6 + 1e-12 * i**2, # grows with i^2
+            "resistance": lambda i: 10 + 0.1 * i,         # increases linearly
+            "length": lambda i: 1.0 + 0.1 * i,            # changes linearly
+            "radius": lambda i: 0.001 + 1e-5 * i          # increases linearly
         }
     # Random behavior with random values for each segment
     elif randomize:
@@ -157,7 +161,7 @@ def main(randomize=False, num_segments=10, dynamic=False):
             "inductance": lambda i: random.uniform(1e-6, 1e0),
             "capacitance": lambda i: random.uniform(1e-12, 1e0),
             "resistance": lambda i: random.uniform(1, 1000),
-            "length": lambda i: random.uniform(0.1, 10),  # Now uses 'i' if dynamic
+            "length": lambda i: random.uniform(0.1, 10),  # uses 'i' if dynamic
             "radius": lambda i: random.uniform(0.0001, 0.01)
         }
     # Static configuration with fixed values for all segments
