@@ -73,5 +73,3 @@ inferred. If the impedance is much greater than the resistance, the circuit is d
 like a resistor (with less phase shift between voltage and current).
 
 Z = [R^2 + (X_L + X_L_wire - (X_C + X_C_wire))^2 ]^(1/2)
-
-##
