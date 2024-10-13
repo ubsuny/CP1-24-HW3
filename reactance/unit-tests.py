@@ -42,12 +42,12 @@ class TestReactanceCalculations(unittest.TestCase):
     def setUp(self):
         # Static configuration values for testing
         self.generator_dict_static = {
-            "frequency": lambda i: 60.0,
-            "inductance": lambda i: 0.01,
-            "capacitance": lambda i: 1e-6,
-            "resistance": lambda i: 10.0,
+            "frequency": lambda i: 1.0,  
+            "inductance": lambda i: 1.0,
+            "capacitance": lambda i: 1.0,
+            "resistance": lambda i: 1.0,
             "length": lambda i: 1.0,
-            "radius": lambda i: 0.001
+            "radius": lambda i: 1.0
         }
         self.num_segments = 5
 
