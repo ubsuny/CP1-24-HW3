@@ -6,8 +6,16 @@
 calculate_resistance = lambda rho, length, area: rho * length / area
 
 # Generator function that yields the resistance values of a wire of given rho and A at different lengths in a list.
+# Check during geneerator if user input invalid values.
 
 def resistance_generator(rho, area, lengths):
+    
+    if area <= 0:
+        raise ValueError("Nuh unh unh you didnt say the magic word. The area entered must be above zero")
+    
+    if not lengths:
+        raise ValueError(" You must input some value for the length stop being naughty. ")
+
     for length in lengths:
         yield calculate_resistance(rho, length, area)
 
@@ -24,7 +32,7 @@ if __name__ == "__main__":
 
         area = float(input(" Please enter the cross-sectional area of your wire in meters square.: "))
         if area <= 0:
-            raise ValueError("The area you have inputed is zero which is unacceptable. Do not be naughty.")
+            raise ValueError("Nuh unh unh you didnt say the magic word. The area entered must be above zero")
 
         # Asking for lengths of wire in a list.
 
