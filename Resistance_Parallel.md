@@ -1,4 +1,4 @@
-#Parallel Circuits
+## Parallel Circuits
 A parallel circuit is one that has two or more paths for the electricity to flow, the loads are parallel to each other. Components are connected side-by-side, forming multiple paths for current flow. The voltage across all components is the same.
 If the loads in this circuit were light bulbs and one blew out, there is still current flowing to the others because they are still in a direct path from the negative to positive terminals of the battery.
 
