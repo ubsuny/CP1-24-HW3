@@ -7,4 +7,6 @@ If the loads in this circuit were light bulbs and one blew out, there is still c
 In a parallel configuration, the reciprocal of the total resistance equals the sum of the reciprocals of the individual resistances:
 The total net resistance \(R_{\text{total}}\) of resistors connected in parallel is given by the formula:
 
-$\displaystyle\frac{1}{{{R}_{\text{net}}}}=\frac{1}{{R}_{{1}}}+\frac{1}{{R}_{{2}}}+\frac{1}{{R}_{{3}}}+\ldots$
+$$
+\frac{1}{R_{\text{total}}} = \frac{1}{R_1} + \frac{1}{R_2} + \cdots + \frac{1}{R_n}
+$$
