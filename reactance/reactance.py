@@ -6,13 +6,13 @@ capacitors in AC circuits. The reactance is calculated based on the frequency
 of the alternating current and the inductance or capacitance of the components.
 
 Functions:
-- inductive_reactance(frequency, inductance): Calculates the inductive reactance
-  (X_L) based on the frequency of the AC signal and the inductance of the
-  inductor.
+- inductive_reactance(frequency, inductance): Calculates the inductive
+  reactance (X_L) based on the frequency of the AC signal and the inductance of
+  the inductor.
 
 - capacitive_reactance(frequency, capacitance): Calculates the capacitive
-  reactance (X_C) based on the frequency of the AC signal and the capacitance of
-  the capacitor.
+  reactance (X_C) based on the frequency of the AC signal and the capacitance
+  of the capacitor.
 
 The module also handles parasitic reactance, combining inductive and capacitive
 components to compute the total reactance and impedance.
@@ -28,8 +28,8 @@ EPSILON_0 = 8.854e-12      # Permittivity of free space (F/m)
 
 def inductive_reactance(frequency, inductance):
     """
-    Calculate the inductive reactance (X_L) for a given inductor or wire's inductive property.
-    If frequency is zero, inductive reactance is zero.
+    Calculate the inductive reactance (X_L) for a given inductor or wire's
+    inductive property. If frequency is zero, inductive reactance is zero.
     """
     if frequency == 0:    # If frequency is 0
         return 0          # don't divide by it, just return 0
@@ -39,13 +39,14 @@ def inductive_reactance(frequency, inductance):
 
 def capacitive_reactance(frequency, capacitance):
     """
-    Calculate the capacitive reactance (X_C) for a given capacitor or wire's capacitive property.
-    If frequency is zero, capacitive reactance is considered infinite.
+    Calculate the capacitive reactance (X_C) for a given capacitor or wire's
+    capacitive property. If frequency is zero, capacitive reactance is
+    considered infinite.
     """
     if frequency == 0:        # If frequency is 0
         return float('inf')   # don't divide by it, just return 0
-    reactance = 1 / (2 * math.pi * frequency * capacitance)  # compute reactance
-    return reactance                                         # and return it
+    reactance = 1 / (2 * math.pi * frequency * capacitance)  # compute
+    return reactance                                         # return
 
 
 def calculate_wire_inductance(length, radius):
@@ -61,43 +62,52 @@ def calculate_wire_capacitance(length, radius):
     """
     Calculate the parasitic capacitance of a straight wire.
     """
-    capacitance = (2 * math.pi * EPSILON_0 * length) / math.log(2 * length / radius)
-    return capacitance
+    capa = (2 * math.pi * EPSILON_0 * length) / math.log(2 * length / radius)
+    return capa
 
 
-def total_impedance_and_phase(frequency, inductance, capacitance, resistance, length, radius):
+def total_impedance_and_phase(tip_dict):
     """
-    Calculate the total impedance (Z) and phase angle (φ) of a circuit, including resistance and wire properties.
+    Calculate the total impedance (Z) and phase angle (φ) of a circuit,
+    including resistance and wire properties.
     """
+    # extract arguments
+    f = tip_dict['f']
+    indc = tip_dict['indc']
+    capa = tip_dict['capa']
+    resistance = tip_dict['resistance']
+    length = tip_dict['length']
+    radius = tip_dict['radius']
+
     # Calculate component inductive and capacitive reactance
-    X_L = inductive_reactance(frequency, inductance)
-    X_C = capacitive_reactance(frequency, capacitance)
+    xL = inductive_reactance(f, indc)
+    xC = capacitive_reactance(f, capa)
 
     # Calculate wire parasitic inductance and capacitance
-    wire_L = calculate_wire_inductance(length, radius)
-    wire_C = calculate_wire_capacitance(length, radius)
+    wireL = calculate_wire_inductance(length, radius)
+    wireC = calculate_wire_capacitance(length, radius)
 
     # Calculate parasitic reactance for the wire
-    wire_X_L = inductive_reactance(frequency, wire_L)
-    wire_X_C = capacitive_reactance(frequency, wire_C)
+    wireXL = inductive_reactance(f, wireL)
+    wireXC = capacitive_reactance(f, wireC)
 
-    # Total reactance is the sum of inductive reactance (including wire) minus capacitive reactance (including wire)
-    total_reactance = (X_L + wire_X_L) - (X_C + wire_X_C)
+    # Computetotal reactance
+    totalReactance = (xL + wireXL) - (xC + wireXC)
 
     # Total impedance calculation
-    total_impedance = math.sqrt(resistance**2 + total_reactance**2)
+    totalImpedance = math.sqrt(resistance**2 + totalReactance**2)
 
     # Phase angle calculation
-    phase_angle_radians = math.atan(total_reactance / resistance)
-    phase_angle_degrees = math.degrees(phase_angle_radians)
+    phaseAngleRadians = math.atan(totalReactance / resistance)
+    phaseAngleDegrees = math.degrees(phaseAngleRadians)
 
-    return total_impedance, phase_angle_degrees
+    return totalImpedance, phaseAngleDegrees
 
 
 def compute_segments(generator_dict, num_segments):
     """
-    Compute the impedance and phase angle for a series of segments along a wire.
-    Store the computed values in lists for later plotting.
+    Compute the impedance and phase angle for a series of segments along a
+    wire. Store the computed values in lists for later plotting.
     """
     impedance_list = []
     phase_angle_list = []
@@ -116,18 +126,20 @@ def compute_segments(generator_dict, num_segments):
         # NOTE: current_length refers to the length of current segment of wire
         current_length = generator_dict["length"](i)
 
+        tip_dict = {
+            'f': generator_dict["frequency"](i),
+            'indc': generator_dict["inductance"](i),
+            'capa': generator_dict["capacitance"](i),
+            'resistance': generator_dict["resistance"](i),
+            'length': current_length,
+            'radius': generator_dict["radius"](i)
+        }
+
         # Call total_impedance_and_phase for each segment using the generators
-        total_Z, phase_angle = total_impedance_and_phase(
-            generator_dict["frequency"](i),
-            generator_dict["inductance"](i),
-            generator_dict["capacitance"](i),
-            generator_dict["resistance"](i),
-            current_length,
-            generator_dict["radius"](i)
-        )
+        totalZ, phase_angle = total_impedance_and_phase(tip_dict)
 
         # Append the results to the lists
-        impedance_list.append(total_Z)
+        impedance_list.append(totalZ)
         phase_angle_list.append(phase_angle)
 
     # return the two lists
@@ -147,12 +159,12 @@ def main(randomize=False, num_segments=10, dynamic=False):
     # Dynamic behavior with lambda functions based on segment index (i)
     if dynamic:
         generator_dict = {
-            "frequency": lambda i: 50 + i**2,             # increases as i^2
-            "inductance": lambda i: 0.01 + 0.0001 * i,    # linearly with i
-            "capacitance": lambda i: 1e-6 + 1e-12 * i**2, # grows with i^2
-            "resistance": lambda i: 10 + 0.1 * i,         # increases linearly
-            "length": lambda i: 1.0 + 0.1 * i,            # changes linearly
-            "radius": lambda i: 0.001 + 1e-5 * i          # increases linearly
+            "frequency": lambda i: 50 + i**2,              # increases as i^2
+            "inductance": lambda i: 0.01 + 0.0001 * i,     # linearly with i
+            "capacitance": lambda i: 1e-6 + 1e-12 * i**2,  # grows with i^2
+            "resistance": lambda i: 10 + 0.1 * i,          # increases linearly
+            "length": lambda i: 1.0 + 0.1 * i,             # changes linearly
+            "radius": lambda i: 0.001 + 1e-5 * i           # increases linearly
         }
     # Random behavior with random values for each segment
     elif randomize:
@@ -176,12 +188,13 @@ def main(randomize=False, num_segments=10, dynamic=False):
         }
 
     # Compute the impedance and phase angle for each segment
-    impedance_list, phase_angle_list = compute_segments(generator_dict, num_segments)
+    impList, pAL = compute_segments(generator_dict, num_segments)
 
     # Print the computed results for each segment
     print("Computed Impedance and Phase Angle for each segment:")
-    for i, (impedance, phase_angle) in enumerate(zip(impedance_list, phase_angle_list)):
-        print(f"Segment {i+1}: Impedance = {impedance:.2f} Ohms, Phase Angle = {phase_angle:.2f}°")
+    for i, (imp, pA) in enumerate(zip(impList, pAL)):
+        print(f"Segment {i+1}: Impedance = {imp:.2f} Ohms")
+        print(f"Phase Angle = {pA:.2f}°")
 
 
 if __name__ == "__main__":
