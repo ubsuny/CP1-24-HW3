@@ -27,10 +27,17 @@ def getFieldMag(cd,r,m):
     eps=8.85*10**-12
     return qe(cd,r)/(eps*a(m))
 
+def zeroCondition(v):
+    return [True for i in v if i==0]
+
 def elecField(o,cd,r,p):
     m=getVMag(sv(p,o))
     r=inside(r,sv(p,o))
+    if len(zeroCondition(sv(p,o)))==3:
+        return np.array([0,0,0])
     return getFieldMag(cd,r,m)*getUVec(m,sv(p,o))
+
+
 
 
 

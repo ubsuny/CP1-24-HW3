@@ -1,7 +1,7 @@
 import unittest
 import math
 import numpy as np
-from electricSphere import getVMag, getUVec, getFieldMag, elecField, inside
+from electricSphere import getVMag, getUVec, getFieldMag, elecField, inside, zeroCondition
 
 class TestElectricFieldCalculations(unittest.TestCase):
     
@@ -37,6 +37,23 @@ class TestElectricFieldCalculations(unittest.TestCase):
         v=np.array([10,10,10])
         r=100
         assert inside(r,(v-o))==getVMag(v)
+
+    def test_zero(self):
+        o=np.array([0,0,0])
+        v=o
+        r=1
+        cd=1
+        for i in range(2):
+            assert elecField(o,cd,r,v)[i]==0
+    
+    def test_zeroCondition(self):
+        v=([0,0,1])
+        assert len(zeroCondition(v))==2
+        v=([0,1,1])
+        assert len(zeroCondition(v))==1
+        v=([1,1,1])
+        assert len(zeroCondition(v))==0
+    
 
 
 
