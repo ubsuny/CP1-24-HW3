@@ -9,8 +9,6 @@ sv=lambda p,o: p-o
 
 qe=lambda cd,r: v(r)*cd
 
-
-
 def getVMag(v):
     return np.sqrt(v[0]**2+v[1]**2+v[2]**2)
 
