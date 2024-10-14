@@ -20,7 +20,7 @@ def net_electric_field(charges_positions, point_position):
     net_field = sum(electric_fields)
     return net_field
 
-# Example usage
+# Example
 charges_positions = [(1e-6, (1, 0)), (-2e-6, (-1, 0)), (1e-6, (0, 1))]
 point_position = (0, 0)
 
