@@ -71,37 +71,30 @@ def total_impedance_and_phase(tip_dict):
     Calculate the total impedance (Z) and phase angle (φ) of a circuit,
     including resistance and wire properties.
     """
-    # extract arguments
-    f = tip_dict['f']
-    indc = tip_dict['indc']
-    capa = tip_dict['capa']
-    resistance = tip_dict['resistance']
-    length = tip_dict['length']
-    radius = tip_dict['radius']
 
     # Calculate component inductive and capacitive reactance
-    xL = inductive_reactance(f, indc)
-    xC = capacitive_reactance(f, capa)
+    x_l = inductive_reactance(tip_dict['f'], tip_dict['indc'])
+    x_c = capacitive_reactance(tip_dict['f'], tip_dict['capa'])
 
     # Calculate wire parasitic inductance and capacitance
-    wireL = calculate_wire_inductance(length, radius)
-    wireC = calculate_wire_capacitance(length, radius)
+    wire_l = calculate_wire_inductance(tip_dict['length'], tip_dict['radius'])
+    wire_c = calculate_wire_capacitance(tip_dict['length'], tip_dict['radius'])
 
     # Calculate parasitic reactance for the wire
-    wireXL = inductive_reactance(f, wireL)
-    wireXC = capacitive_reactance(f, wireC)
+    wire_x_l = inductive_reactance(tip_dict['f'], wire_l)
+    wire_c_l = capacitive_reactance(tip_dict['f'], wire_c)
 
     # Computetotal reactance
-    totalReactance = (xL + wireXL) - (xC + wireXC)
+    total_reactance = (x_l + wire_x_l) - (x_c + wire_c_l)
 
     # Total impedance calculation
-    totalImpedance = math.sqrt(resistance**2 + totalReactance**2)
+    total_impedance = math.sqrt(tip_dict['resistance']**2 + total_reactance**2)
 
     # Phase angle calculation
-    phaseAngleRadians = math.atan(totalReactance / resistance)
-    phaseAngleDegrees = math.degrees(phaseAngleRadians)
+    phase_angle_radians = math.atan(total_reactance / tip_dict['resistance'])
+    phase_angle_degrees = math.degrees(phase_angle_radians)
 
-    return totalImpedance, phaseAngleDegrees
+    return total_impedance, phase_angle_degrees
 
 
 def compute_segments(generator_dict, num_segments):
