@@ -1,11 +1,11 @@
-# Classical Electrodynamics Exxample - Electric Field 
+# Classical Electrodynamics Example - Electric Field 
 
 ## 1. Introduction
 
-The electric field \( \mathbf{E} \) is a fundamental concept in electromagnetism, representing the force per unit charge exerted on a test charge placed at a point in space. 
+The electric field $E$ is a fundamental concept in electromagnetism, representing the force per unit charge exerted on a test charge placed at a point in space. 
 Classical Electrodynamics uses a field theory approach in order to explain the physics of interactions which is different from the newtonian way of approaching the natural phenomena ( describing the force between the masses directly). Maxwell's equations explain the charecteristics of Electriv Field in great detail and how it generates from time varying magnetic field.
 
-Here I will document the theory of Electriv Fields at a graduate level, although explain the functioning of the code using the example of Coulomb's law due to a single charge.
+Here I will document the theory of Electric Fields at a graduate level, although explain the functioning of the code using the example of Coulomb's law due to a single charge.
 
 ## 2. Electric Field from Coulomb’s Law
 
