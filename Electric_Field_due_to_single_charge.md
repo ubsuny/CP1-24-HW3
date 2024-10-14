@@ -17,12 +17,12 @@ $$
 
 Where:
 
-\( \mathbf{r} \) is the position vector where the electric field is being measured.
+\\( \mathbf{r} \\) is the position vector where the electric field is being measured.
 
-\( \mathbf{r}_0 \) is the position vector of the point charge.
+\\( \mathbf{r}_0 \\) is the position vector of the point charge.
 
-\( q \) is the magnitude of the charge.
+\\( q \\) is the magnitude of the charge.
 
-\( \varepsilon_0 = 8.85 \times 10^{-12} \, \text{C}^2/\text{Nm}^2 \) is the permittivity of free space.
+\\( \varepsilon_0 = 8.85 \times 10^{-12} \, \text{C}^2/\text{Nm}^2 \\) is the permittivity of free space.
 
 This expression shows that the electric field due to a point charge decreases with the square of the distance and is directed radially outward from the charge for positive \( q \) (inward for negative \( q \)).
