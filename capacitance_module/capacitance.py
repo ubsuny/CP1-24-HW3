@@ -1,4 +1,4 @@
-# capacitance.py (extended with lambda and map)
+#ance.py (extended with lambda and map)
 
 # Constant for permittivity of free space
 epsilon_0 = 8.854e-12  # F/m
@@ -22,7 +22,7 @@ if __name__ == "__main__":
     d = 0.01  # Distance in meters
     print(f"Capacitance: {capacitance(A, d)} F")
 
-    # List of areas and distances
+    # List of ar capaciteas and distances
     areas = [1.0, 2.0, 0.5]  # Areas in square meters
     distances = [0.01, 0.02, 0.005]  # Corresponding distances in meters
 
