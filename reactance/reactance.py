@@ -129,10 +129,10 @@ def compute_segments(generator_dict, num_segments):
         }
 
         # Call total_impedance_and_phase for each segment using the generators
-        totalZ, phase_angle = total_impedance_and_phase(tip_dict)
+        total_z, phase_angle = total_impedance_and_phase(tip_dict)
 
         # Append the results to the lists
-        impedance_list.append(totalZ)
+        impedance_list.append(total_z)
         phase_angle_list.append(phase_angle)
 
     # return the two lists
@@ -181,13 +181,13 @@ def main(randomize=False, num_segments=10, dynamic=False):
         }
 
     # Compute the impedance and phase angle for each segment
-    impList, pAL = compute_segments(generator_dict, num_segments)
+    imp_list, p_a_l = compute_segments(generator_dict, num_segments)
 
     # Print the computed results for each segment
     print("Computed Impedance and Phase Angle for each segment:")
-    for i, (imp, pA) in enumerate(zip(impList, pAL)):
+    for i, (imp, p_a) in enumerate(zip(imp_list, p_a_l)):
         print(f"Segment {i+1}: Impedance = {imp:.2f} Ohms")
-        print(f"Phase Angle = {pA:.2f}°")
+        print(f"Phase Angle = {p_a:.2f}°")
 
 
 if __name__ == "__main__":

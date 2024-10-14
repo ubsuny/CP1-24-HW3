@@ -1,5 +1,5 @@
 """
-unit-tests.py
+unitTests.py
 
 This module contains unit tests for validating the functions in the
 `reactance.py` module.It uses the `unittest` framework to check calculations
@@ -65,11 +65,11 @@ class TestReactanceCalculations(unittest.TestCase):
         }
 
         # Compute impedance and phase for this simple setup
-        iList, pal = compute_segments(generator_dict_simple, self.num_segments)
+        i_lst, pal = compute_segments(generator_dict_simple, self.num_segments)
 
         # Simple check: with these values, reactance and impedance
         # should be within a reasonable range
-        for impedance, phase_angle in zip(iList, pal):
+        for impedance, phase_angle in zip(i_lst, pal):
             # Impedance should be positive
             self.assertGreater(impedance, 0)
             # Phase angle should be within [-90, 90] degrees
@@ -98,7 +98,7 @@ class TestReactanceCalculations(unittest.TestCase):
         """Test calculation of parasitic inductance for a wire"""
         length = 1.0
         radius = 0.001
-        ei_f = (4 * math.pi * 1e-7 / (2 * math.pi))
+        ei_f = 4 * math.pi * 1e-7 / (2 * math.pi)
         ei = ei_f * math.log(2 * length / radius)
         self.assertAlmostEqual(calculate_wire_inductance(length, radius), ei)
 
@@ -121,13 +121,13 @@ class TestReactanceCalculations(unittest.TestCase):
         }
 
         # Expected impedance and phase angle
-        totalZ, phaseAngle = total_impedance_and_phase(tip_dict)
+        total_z, p_a = total_impedance_and_phase(tip_dict)
 
         # Assert impedance is a positive value
-        self.assertGreater(totalZ, 0)
+        self.assertGreater(total_z, 0)
 
         # Assert phase angle is within reasonable bounds (-90 to 90 degrees)
-        self.assertTrue(-90 <= phaseAngle <= 90)
+        self.assertTrue(-90 <= p_a <= 90)
 
     def test_compute_segments_static(self):
         """Test compute_segments function with static values"""
