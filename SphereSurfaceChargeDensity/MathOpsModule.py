@@ -8,7 +8,8 @@ def div(numerator, denominator):
     Returns:
     number (float): The result of dividing the first number by the second number utilizing the lambda expression
     """
-    return lambda numerator, denominator: numerator/denominator
+    Div = lambda x, y: x/y
+    return Div(numerator, denominator)
 
 def mult(x, y):
     """
@@ -18,4 +19,5 @@ def mult(x, y):
     Returns:
     number (float): The result of multiplying the two numbers utilizing the lambda expression
     """
-    return lambda x, y: x*y
+    Mult = lambda xx, yy: xx*yy
+    return Mult(x, y)
