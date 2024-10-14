@@ -1,5 +1,5 @@
 import unittest
-import CoulombsLaw.Coulumb as Coulumb
+import coulomb
 
 # Test class for Coulomb's law function
 class TestElectricForce(unittest.TestCase):
@@ -23,8 +23,8 @@ class TestElectricForce(unittest.TestCase):
         The charges are given in coulombs and the distance in meters.
         """
 
-        result = Coulumb.calculate_electric_force(1e-6, 1e-6, 0.1)  # Example charges and distance
-        expected = Coulumb.COULOMBS_CONSTANT * abs(1e-6 * 1e-6) / (0.1**2)
+        result = coulomb.calculate_electric_force(1e-6, 1e-6, 0.1)  # Example charges and distance
+        expected = coulomb.COULOMBS_CONSTANT * abs(1e-6 * 1e-6) / (0.1**2)
         self.assertAlmostEqual(result, expected)
 
     def test_negative_charge(self):
@@ -35,8 +35,8 @@ class TestElectricForce(unittest.TestCase):
         The charges are given in coulombs and the distance in meters.
         """
 
-        result = Coulumb.calculate_electric_force(-1e-6, -1e-6, 0.1)  # Both charges negative
-        expected = Coulumb.COULOMBS_CONSTANT * abs(-1e-6 * -1e-6) / (0.1**2)
+        result = coulomb.calculate_electric_force(-1e-6, -1e-6, 0.1)  # Both charges negative
+        expected = coulomb.COULOMBS_CONSTANT * abs(-1e-6 * -1e-6) / (0.1**2)
         self.assertAlmostEqual(result, expected)
 
     def test_zero_distance(self):
@@ -47,7 +47,7 @@ class TestElectricForce(unittest.TestCase):
         which would lead to an undefined result in Coulomb's law. It should return an error message.
         """
 
-        result = Coulumb.calculate_electric_force(-1e-6, -1e-6, 0)
+        result = coulomb.calculate_electric_force(-1e-6, -1e-6, 0)
         expected = print("Distance between charges cannot be zero.")  # Expected behavior for zero distance
         self.assertEqual(result, expected)
 
@@ -59,7 +59,7 @@ class TestElectricForce(unittest.TestCase):
         as the force should be zero when any charge is zero.
         """
 
-        result = Coulumb.calculate_electric_force(0, 1e-6, 0.1)  # One charge is zero
+        result = coulomb.calculate_electric_force(0, 1e-6, 0.1)  # One charge is zero
         expected = 0  # Electric force should be zero
         self.assertEqual(result, expected)
 
