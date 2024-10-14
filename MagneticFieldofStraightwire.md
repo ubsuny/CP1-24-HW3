@@ -175,7 +175,9 @@ The magnetic field at 0.5 m from a wire carrying 10.0 A is 4.00e-06 T.
 The magnetic field at 100 m from a wire carrying 10.0 A is 2.00e-08 T.
 
 #Using Lambda Function
-![Screenshot 2024-10-14 165922.jpg] 
+![<img width="666" alt="Screenshot 2024-10-14 171115 1" src="](https://github.com/user-attachments/assets/8407ba66-6217-4f84-b34d-319db9356f1f">)
+
 
 #Using Generator Function
-![Screenshot 2024-10-14 170110.jpg]
+<img width="673" alt="Screenshot 2024-10-14 170110 2" src="https://github.com/user-attachments/assets/1496423e-7e7f-4ead-ac26-eec963ae9dd9">
+
