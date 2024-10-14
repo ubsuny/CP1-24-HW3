@@ -1,4 +1,4 @@
-import Coulumb
+import CoulombsLaw.Coulumb as Coulumb
 
 coulomb_to_microcoulomb = 10**-6
 

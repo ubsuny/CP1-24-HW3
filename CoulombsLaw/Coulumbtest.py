@@ -1,5 +1,5 @@
 import unittest
-import Coulumb
+import CoulombsLaw.Coulumb as Coulumb
 
 # Test class for Coulomb's law function
 class TestElectricForce(unittest.TestCase):
