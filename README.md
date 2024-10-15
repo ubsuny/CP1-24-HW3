@@ -55,7 +55,7 @@ Also use discord for discussing solutions to any issues popping up.
 | Total                            |                |              | 18         |
 |                                  |                |              |            |
 | Shared project points            |                |              |            |
-| \# Milestones                    | 18             | 1/6          | 3          |
+| \# Milestones                    | 15             | 1/5          | 3          |
 |                                  |                |              |            |
 | Total                            |                |              | 21         |
 |                                  |                |              |            |
