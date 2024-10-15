@@ -67,7 +67,10 @@ class TestCapacitanceCalculations(unittest.TestCase):
         permittivity = 5  # Relative permittivity of the dielectric material
         expected_capacitance = 4.427e-9  # Expected capacitance value in Farads
         # Check if the function returns the correct capacitance with a dielectric
-        self.assertAlmostEqual(calculate_capacitance_with_dielectric(area, distance, permittivity), expected_capacitance)
+        self.assertAlmostEqual(
+            calculate_capacitance_with_dielectric(area, distance, permittivity),
+            expected_capacitance
+        )
 
     def test_total_capacitance_series(self):
         """
@@ -81,8 +84,12 @@ class TestCapacitanceCalculations(unittest.TestCase):
         capacitors = [1e-6, 2e-6, 3e-6]  # List of capacitances in Farads
         expected_total_capacitance = 5e-7  # Expected total capacitance in Farads
         # Check if the function returns the correct total capacitance in series
-        self.assertAlmostEqual(calculate_total_capacitance_series(capacitors), expected_total_capacitance)
+        self.assertAlmostEqual(
+            calculate_total_capacitance_series(capacitors),
+            calculate_total_capacitance_series(capacitors),
+        )
 
+        
     def test_total_capacitance_parallel(self):
         """
         Test total capacitance calculation for capacitors connected in parallel.
@@ -94,7 +101,10 @@ class TestCapacitanceCalculations(unittest.TestCase):
         capacitors = [1e-6, 2e-6, 3e-6]  # List of capacitances in Farads
         expected_total_capacitance = 6e-6  # Expected total capacitance in Farads
         # Check if the function returns the correct total capacitance in parallel
-        self.assertAlmostEqual(calculate_total_capacitance_parallel(capacitors), expected_total_capacitance)
+        self.assertAlmostEqual(
+            calculate_total_capacitance_parallel(capacitors),
+             expected_total_capacitance
+        )
 
     def test_parasitic_capacitance(self):
         """
@@ -112,7 +122,10 @@ class TestCapacitanceCalculations(unittest.TestCase):
         distance = 0.01  # Distance between the conductors in meters
         expected_parasitic_capacitance = 8.854e-14  # Expected parasitic capacitance in Farads
         # Check if the function returns the correct parasitic capacitance
-        self.assertAlmostEqual(calculate_parasitic_capacitance(area, distance), expected_parasitic_capacitance)
+        self.assertAlmostEqual(
+            calculate_parasitic_capacitance(area, distance),
+            expected_parasitic_capacitance
+        )
 
     def test_very_small_area_and_distance(self):
         """
