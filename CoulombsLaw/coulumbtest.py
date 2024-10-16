@@ -1,3 +1,10 @@
+"""
+Unit Tests for Coulomb's Law Calculation
+
+This module contains unit tests for verifying the behavior of the `calculate_electric_force`
+function in the `coulomb` module. It utilizes the `unittest` framework to ensure the
+correct calculation of electric force between two point charges under various scenarios.
+"""
 import unittest
 import coulomb
 
