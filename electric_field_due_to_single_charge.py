@@ -8,9 +8,15 @@ import numpy as np
 # Coulomb constant in Nm^2/C^2
 k = 8.99e9
 
-# Lambda functions
-separation_vector = lambda p, o: (p[0] - o[0], p[1] - o[1])  # Separation vector between two points
-magnitude = lambda v: np.sqrt(v[0]**2 + v[1]**2)  # Magnitude of a 2D vector
+# Define functions instead of using lambda
+
+def separation_vector(p, o):
+    """Calculate the separation vector between two points."""
+    return (p[0] - o[0], p[1] - o[1])
+
+def magnitude(v):
+    """Calculate the magnitude of a 2D vector."""
+    return np.sqrt(v[0]**2 + v[1]**2)
 
 def electric_field_single_charge(q, r_vector):
     """
@@ -31,7 +37,7 @@ def electric_field_single_charge(q, r_vector):
     E_magnitude = k * q / r_mag**2
     # Unit vector in the direction of r_vector
     unit_vector = (r_vector[0] / r_mag, r_vector[1] / r_mag)
-    # Electric field vector components 
+    # Electric field vector components
     E_vector = (E_magnitude * unit_vector[0], E_magnitude * unit_vector[1])
     return E_vector
 
@@ -45,6 +51,13 @@ def net_electric_field(charges_positions, point_position):
     point_position (tuple): The (x, y) position in meters.
     Returns:
     tuple: The net electric field vector (Ex, Ey) in N/C
+    Example:
+    --------
+    >>> charges_positions_list = [(1e-6, (1, 0)), (-2e-6, (-1, 0)), (1e-6, (0, 1))]
+    >>> target_point = (0, 0)
+    >>> net_field = net_electric_field(charges_positions_list, target_point)
+    >>> print(f"Net electric field at point {target_point}: Ex = {net_field[0]:.2e} N/C, Ey = {net_field[1]:.2e} N/C")
+    Net electric field at point (0, 0): Ex = 2.70e+04 N/C, Ey = 8.99e+03 N/C
     """
     # Use map to calculate the electric field vector for each charge at the target point
     fields = map(
@@ -61,12 +74,3 @@ def net_electric_field(charges_positions, point_position):
     net_field_y = sum(fields_y)
 
     return net_field_x, net_field_y
-# Example
-if __name__ == "__main__":
-    charges_positions_list = [(1e-6, (1, 0)), (-2e-6, (-1, 0)), (1e-6, (0, 1))]
-    target_point = (0, 0)
-    net_field = net_electric_field(charges_positions_list, target_point)
-    print(
-        f"Net electric field at point {target_point}: "
-        f"Ex = {net_field[0]:.2e} N/C, Ey = {net_field[1]:.2e} N/C"
-    )
