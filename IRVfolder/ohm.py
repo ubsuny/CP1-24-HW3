@@ -1,5 +1,4 @@
 import numpy as np
-
 def ohmscur(r, v):
     div = lambda x, y: x/y
     if int(r)==0:
@@ -7,8 +6,6 @@ def ohmscur(r, v):
     else:
         print ("Your current is",div(v,r))
         return div(v,r)
-
-
 def ohmsres(i, v):
     div = lambda x, y: x/y
     if int(i)==0:
@@ -20,7 +17,6 @@ def ohmsvol(i, r):
     mult = lambda x, y: x*y
     print ("Your voltage is",mult(i,r))
     return mult(i,r)
-
 
 def batch_ohmscur(x1List,x2List,func):
     return [IRV(x1,x2) for x1,x2 in zip(x1List,x2List)]
