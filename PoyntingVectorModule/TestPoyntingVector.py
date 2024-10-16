@@ -9,24 +9,32 @@ import sympy as sp
 from PoyntingVector import poynting_vector_value, poynting_vector_magnitude
 
 class PoyntingVectorTest(unittest.TestCase):
+    # this class implements the unitest functions
 
-    def test_poynting_vector_value(self): 
-        E = sp.Matrix([1.0, 0.0, 0.0]).T
-        B = sp.Matrix([0.0, 1.0, 0.0]).T
+    def test_poynting_vector_value(self):
+        # testing the poynting vector value function
+        e = sp.Matrix([1.0, 0.0, 0.0]).T
+        b = sp.Matrix([0.0, 1.0, 0.0]).T
         position = [0.0, 0.0, 0.0]
         time = 0.0
 
-        Snum = poynting_vector_value(E, B, position, time) # obtainng the PoyntingVector for trivial case
-        AnswerDirection = sp.Matrix([0.0, 0.0, 1.0]).T # checking if first component is equal to the expected result
+        pv_num = poynting_vector_value(e, b, position, time)
+        # obtainng the PoyntingVector for trivial case
 
-        assert Snum[0] == AnswerDirection[0]
+        answer_direction = sp.Matrix([0.0, 0.0, 1.0]).T
+        # checking if first component is equal to the expected result
+
+        assert pv_num[0] == answer_direction[0]
 
     def test_poynting_vector_magnitude(self):
-        S = [3.0, 4.0, 0.0] 
+        # testing the poynting ector magnitude function
+        pv = [3.0, 4.0, 0.0]
 
-        Smag = poynting_vector_magnitude(S) # obtaining the trivial case PoyntingVector magnitude
+        pv_mag = poynting_vector_magnitude(pv)
+        # obtaining the trivial case PoyntingVector magnitude
 
-        assert Smag == 5 # asserting the value to the expected result
+        assert pv_mag == 5 # asserting the value to the expected result
 
 if __name__ == '__main__':
+    # running the unit test script
     unittest.main()
