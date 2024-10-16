@@ -19,7 +19,8 @@ def calculate_electric_force(q1, q2, r):
     r (float): The distance between the charges in meters (m).
     
     Returns:
-    float: The calculated electric force in newtons (N), or prints a message if the distance is zero.
+    float: The calculated electric force in newtons (N),
+    or prints a message if the distance is zero.
     
     If the distance between the charges is zero, the function will print an error message 
     ('Distance between charges cannot be zero.') instead of calculating the force.

@@ -55,7 +55,7 @@ class TestElectricForce(unittest.TestCase):
         """
 
         result = coulomb.calculate_electric_force(-1e-6, -1e-6, 0)
-        expected = print("Distance between charges cannot be zero.")  # Expected behavior for zero distance
+        expected = print("Distance between charges cannot be zero.") # Zero distance
         self.assertEqual(result, expected)
 
     def test_zero_charge(self):
