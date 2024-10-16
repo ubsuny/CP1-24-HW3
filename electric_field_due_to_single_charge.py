@@ -18,7 +18,7 @@ def electric_field_single_charge(q, r_vector):
 
     Parameters:
     q (float): Charge in Coulombs
-    r_vector (tuple or list): The vector from the charge to the point where the field is calculated (x, y)
+    r_vector (tuple or list): The vector from the charge to the point (x, y)
     
     Returns:
     tuple: The electric field vector (Ex, Ey) in N/C
@@ -31,10 +31,8 @@ def electric_field_single_charge(q, r_vector):
     E_magnitude = k * q / r_mag**2
     # Unit vector in the direction of r_vector
     unit_vector = (r_vector[0] / r_mag, r_vector[1] / r_mag)
-
     # Electric field vector components 
     E_vector = (E_magnitude * unit_vector[0], E_magnitude * unit_vector[1])
-    
     return E_vector
 
 def net_electric_field(charges_positions, point_position):
@@ -48,7 +46,6 @@ def net_electric_field(charges_positions, point_position):
     Returns:
     tuple: The net electric field vector (Ex, Ey) in N/C
     """
-
     # Use map to calculate the electric field vector for each charge at the target point
     fields = map(
         lambda charge: electric_field_single_charge(
