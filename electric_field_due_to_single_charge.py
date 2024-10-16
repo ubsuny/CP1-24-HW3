@@ -34,12 +34,12 @@ def electric_field_single_charge(q, r_vector):
         raise ValueError("The point cannot be located at the same position as the charge.")
 
     # Electric field magnitude
-    E_magnitude = k * q / r_mag**2
+    e_magnitude = k * q / r_mag**2
     # Unit vector in the direction of r_vector
     unit_vector = (r_vector[0] / r_mag, r_vector[1] / r_mag)
     # Electric field vector components
-    E_vector = (E_magnitude * unit_vector[0], E_magnitude * unit_vector[1])
-    return E_vector
+    e_vector = (e_magnitude * unit_vector[0], e_magnitude * unit_vector[1])
+    return e_vector
 
 def net_electric_field(charges_positions, point_position):
     """
@@ -56,7 +56,10 @@ def net_electric_field(charges_positions, point_position):
     >>> charges_positions_list = [(1e-6, (1, 0)), (-2e-6, (-1, 0)), (1e-6, (0, 1))]
     >>> target_point = (0, 0)
     >>> net_field = net_electric_field(charges_positions_list, target_point)
-    >>> print(f"Net electric field at point {target_point}: Ex = {net_field[0]:.2e} N/C, Ey = {net_field[1]:.2e} N/C")
+    >>> print(
+            f"Net electric field at point {target_point}: "
+            f"Ex = {net_field[0]:.2e} N/C, Ey = {net_field[1]:.2e} N/C"
+        )
     Net electric field at point (0, 0): Ex = 2.70e+04 N/C, Ey = 8.99e+03 N/C
     """
     # Use map to calculate the electric field vector for each charge at the target point
