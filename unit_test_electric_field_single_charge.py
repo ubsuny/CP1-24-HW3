@@ -1,7 +1,9 @@
 """This unit test script includes a test for a single charge function, for net field from multiple charges, to ensure error handling works correctly for zero distances"""
 
 import unittest
-from electric_field_due_to_single_charge import electric_field_single_charge, net_electric_field
+from electric_field_due_to_single_charge import (
+    electric_field_single_charge, net_electric_field
+)
 
 class TestElectricField(unittest.TestCase):
     """
@@ -46,4 +48,3 @@ class TestElectricField(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
