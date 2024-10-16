@@ -1,3 +1,5 @@
+# Poynting Vector
+
 The most general expression for plane polarised electromagnetic wave is given as:
 
 $$\textbf{E}(\textbf{r},t) = E_0 \cos({\textbf{k}.\textbf{r} - \omega t + \delta})\hat{n}$$

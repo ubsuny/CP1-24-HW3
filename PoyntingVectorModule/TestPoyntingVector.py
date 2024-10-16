@@ -1,14 +1,12 @@
 '''
 This module runs the unittest for the functions in PoyntingVector.py module 
 '''
-import numpy as np
-import sympy as sp
 import math
 import unittest
+import sympy as sp
 
 # importing all functions from PoyntingVector module
-from PoyntingVector import electric_field_expression, magnetic_field_expression, poynting_vector_expression, poynting_vector_value, poynting_vector_magnitude
-
+from PoyntingVector import poynting_vector_value, poynting_vector_magnitude
 
 class PoyntingVectorTest(unittest.TestCase):
 
