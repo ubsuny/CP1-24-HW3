@@ -1,5 +1,7 @@
 #Python code for Magnetic field of wire
 import math
+import numpy as np
+import matplotlib.pyplot as plt
 
 def magnetic_field(I, d):
     """
@@ -31,16 +33,15 @@ for distance in distances:
 
 
 #Python code for Magnetic field of wire Using Lambda function
-import numpy as np
-import matplotlib.pyplot as plt
 
 # Constants
-mu_0 = 4 * np.pi * 10**-7  # Permeability of free space (T m/A)
+mu_0 = 4 * math.pi * 10**-7  # Permeability of free space (T m/A)
 
 # Parameters
 current = 10  # Current in amperes
 # Use np.array to create an array of distances
 distances = np.array([0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 100])  # Distances from 0.01 m to 100 m
+
 
 # Lambda function to calculate magnetic field
 magnetic_field = lambda I, r: (mu_0 * I) / (2 * np.pi * r)
@@ -65,17 +66,10 @@ plt.show()
 
 #Python code for Magnetic field of wire Using Generator function
 
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Constants
-mu_0 = 4 * np.pi * 10**-7  # Permeability of free space (T m/A)
-
 def magnetic_field_generator(current, distances):
     """Generator function to yield magnetic field values for given distances."""
     for r in distances:
-        yield (mu_0 * current) / (2 * np.pi * r)
+        yield (mu_0 * current) / (2 * np.pi * d)
 
 # Parameters
 current = 10  # Current in amperes
