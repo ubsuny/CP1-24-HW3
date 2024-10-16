@@ -8,10 +8,8 @@ the Lorentz force for a list of particles.
 
 import math
 
-# Lambda function to calculate Lorentz force
-lorentz_force = lambda charge, velocity, magnetic_field, angle_radians: (
-    charge * velocity * magnetic_field * math.sin(angle_radians)
-)
+def lorentz_force(charge, velocity, magnetic_field, angle_radians):
+   return charge * velocity * magnetic_field * math.sin(angle_radians)
 
 def main():
     """
