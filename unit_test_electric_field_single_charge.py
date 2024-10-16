@@ -22,8 +22,8 @@ class TestElectricField(unittest.TestCase):
         expected_ey = 0.0      # N/C in the y-direction
 
         # Check that the results match expected values
-        self.assertAlmostEqual(result[0], expected_Ex, places=2)
-        self.assertAlmostEqual(result[1], expected_Ey, places=2)
+        self.assertAlmostEqual(result[0], expected_ex, places=2)
+        self.assertAlmostEqual(result[1], expected_ey, places=2)
 
     def test_net_electric_field(self):
         """
@@ -41,8 +41,8 @@ class TestElectricField(unittest.TestCase):
         expected_ey = 8.99e3  # N/C in the y-direction
 
         # Check that the results match expected values
-        self.assertAlmostEqual(result[0], expected_Ex, places=2)
-        self.assertAlmostEqual(result[1], expected_Ey, places=2)
+        self.assertAlmostEqual(result[0], expected_ex, places=2)
+        self.assertAlmostEqual(result[1], expected_ey, places=2)
 
 if __name__ == '__main__':
     unittest.main()
