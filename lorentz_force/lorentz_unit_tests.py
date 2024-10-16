@@ -31,7 +31,8 @@ def test_lorentz_force_at_0_degrees():
     angle_radians = 0  # 0 degrees
 
     expected_force = 0  # sin(0 degrees) is 0
-    assert lorentz_force(charge, velocity, magnetic_field, angle_radians) == expected_force
+    assert math.isclose(lorentz_force(
+        charge, velocity, magnetic_field, angle_radians), expected_force)
 
 
 def test_lorentz_force_at_45_degrees():
