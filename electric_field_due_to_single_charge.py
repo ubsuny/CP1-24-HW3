@@ -49,7 +49,7 @@ def net_electric_field(charges_positions, point_position):
     """
 
     # Use map to calculate the electric field vector for each charge at the target point
-    fields = map(lambda charge: electric_field_single_charge(charge[0], seperation_vector(point_position, charge[1])), charges_position)
+    fields = map(lambda charge: electric_field_single_charge(charge[0], separation_vector(point_position, charge[1])), charges_positions)
     
     # List comprehension to gather x and y components of electric fields from all charges
     fields_x = [field[0] for field in fields]
