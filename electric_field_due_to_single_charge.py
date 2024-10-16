@@ -42,7 +42,7 @@ def net_electric_field(charges_positions, point_position):
     charges_positions (list of tuples): A list of tuples, where each tuple contains:
         - charge (q) in Coulombs,
         - position (x, y) in meters of the charge.
-    point_position (tuple): The (x, y) position in meters where the net electric field is calculated.
+    point_position (tuple): The (x, y) position in meters.
     Returns:
     tuple: The net electric field vector (Ex, Ey) in N/C
     """
@@ -66,4 +66,7 @@ if __name__ == "__main__":
     charges_positions_list = [(1e-6, (1, 0)), (-2e-6, (-1, 0)), (1e-6, (0, 1))]
     target_point = (0, 0)
     net_field = net_electric_field(charges_positions_list, target_point)
-    print(f"Net electric field at point {target_point}: Ex = {net_field[0]:.2e} N/C, Ey = {net_field[1]:.2e} N/C")
+    print(
+        f"Net electric field at point {target_point}: "
+        f"Ex = {net_field[0]:.2e} N/C, Ey = {net_field[1]:.2e} N/C"
+    )
