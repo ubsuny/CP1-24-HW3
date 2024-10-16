@@ -18,8 +18,8 @@ class TestElectricField(unittest.TestCase):
         result = electric_field_single_charge(charge, r_vector)
 
         # Expected result for Ex and Ey
-        expected_Ex = -8.99e3  # N/C in the x-direction
-        expected_Ey = 0.0      # N/C in the y-direction
+        expected_ex = -8.99e3  # N/C in the x-direction
+        expected_ey = 0.0      # N/C in the y-direction
 
         # Check that the results match expected values
         self.assertAlmostEqual(result[0], expected_Ex, places=2)
@@ -37,8 +37,8 @@ class TestElectricField(unittest.TestCase):
         result = net_electric_field(charges_positions, point_position)
 
         # Expected result: Net electric field vector at the origin (calculated previously)
-        expected_Ex = 2.70e4  # N/C in the x-direction
-        expected_Ey = 8.99e3  # N/C in the y-direction
+        expected_ex = 2.70e4  # N/C in the x-direction
+        expected_ey = 8.99e3  # N/C in the y-direction
 
         # Check that the results match expected values
         self.assertAlmostEqual(result[0], expected_Ex, places=2)
