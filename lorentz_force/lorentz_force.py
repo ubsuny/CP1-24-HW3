@@ -18,8 +18,8 @@ def lorentz_force(charge, velocity, magnetic_field, angle_radians):
     Returns:
         Lorentz force
     """
-   return charge * velocity * magnetic_field * math.sin(angle_radians)
-   
+    return charge * velocity * magnetic_field * math.sin(angle_radians)
+
 def main():
     """
     Demonstrates the calculation of Lorentz forces for a list of particles.
