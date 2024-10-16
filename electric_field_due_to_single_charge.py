@@ -1,53 +1,65 @@
-import math
+import numpy as np
 
 # Coulomb constant in Nm^2/C^2
 k = 8.99e9
 
-def electric_field_single_charge(q, r):
+# Lambda functions
+separation_vector = lambda p, o: (p[0] - o[0], p[1] - o[1])  # Separation vector between two points
+magnitude = lambda v: np.sqrt(v[0]**2 + v[1]**2)  # Magnitude of a 2D vector
+
+def electric_field_single_charge(q, r_vector):
     """
-    Calculate the electric field due to a single point charge using Coulomb's law.
-    
+    Calculate the electric field due to a single point charge at a given point.
+
     Parameters:
     q (float): Charge in Coulombs
-    r (float): Distance in meters from the charge to the point where the field is calculated
-    
-    Returns:
-    float: Electric field magnitude in N/C
-    """
-    if r == 0:
-        raise ValueError("Distance r cannot be zero to avoid division by zero.")
-    return k * q / r**2
+    r_vector (tuple or list): The vector from the charge to the point where the field is calculated (x, y)
 
-def net_electric_field(charges_positions, point_position):
+    Returns:
+    tuple: The electric field vector (Ex, Ey) in N/C
     """
-    Calculate the net electric field at a given point due to multiple point charges.
+    r_mag = magnitude(r_vector)  # Calculate the magnitude of the seperation vector
     
+    if r_mag == 0:
+        raise ValueError("The point cannot be located at the same position as the charge.")
+
+    # Electric field magnitude
+    E_magnitude = k * q / r_mag**2
+
+    # Unit vector in the direction of r_vector
+    unit_vector = ( r_vector[0] / r_mag, r_vector[1] / r_mag)
+
+    # Electric field vector components 
+    E_vector = (E_magnitude * unit_vector[0], E_magnitude * unit_vector[1])
+    
+    return E_vector
+    
+def net_electric_field(charges_positions, point_position):
+   """
+    Calculate the net electric field at a given point due to multiple point charges.
+
     Parameters:
-    charges_positions_list (list of tuples): A list of tuples, where each tuple contains:
+    charges_positions (list of tuples): A list of tuples, where each tuple contains:
         - charge (q) in Coulombs,
         - position (x, y) in meters of the charge.
-    target_point (tuple): The (x, y) position in meters where the net electric field is calculated.
-    
-    Returns:
-    float: The net electric field magnitude in N/C at the target_point.
-    """
-    distances = list(
-        map(
-            lambda pos: math.sqrt(
-                (pos[1][0] - point_position[0])**2 + (pos[1][1] - point_position[1])**2
-            ), 
-            charges_positions
-        )
-    )
-    electric_fields = [
-        electric_field_single_charge(charge[0], dist) 
-        for charge, dist in zip(charges_positions, distances)
-    ]
+    point_position (tuple): The (x, y) position in meters where the net electric field is calculated.
 
-    # Sum up the magnitudes of all electric fields
-    total_net_field = sum(electric_fields)
+    Returns:
+    tuple: The net electric field vector (Ex, Ey) in N/C
+    """
+
+    # Use map to calculate the electric field vector for each charge at the target point
+    fields = map(lambda charge: electric field_single_charge(charge[0], seperation_vector(point_position, charge[1])),
     
-    return total_net_field
+    # List comprehension to gather x and y components of electric fields from all charges
+    fields_x = [field[0] for field in fields]
+    fields_y = [field[1] for field in fields]
+
+    #Use sum to sum up all x and y components to get the net field
+    net_field_x = sum(field_x)
+    net_field_y = sum(fields_y)
+
+    return net_field_x, net_field_y
 
 # Example
 if __name__ == "__main__":
@@ -55,5 +67,5 @@ if __name__ == "__main__":
     target_point = (0, 0)
     
     net_field = net_electric_field(charges_positions_list, target_point)
-    print(f"Net electric field at point {target_point}: {net_field:.2e} N/C")
+    print(f"Net electric field at point {target_point}: Ex = {net_field[0]:.2e} N/C, Ey = {net_field[1]:.2e} N/C")
     
