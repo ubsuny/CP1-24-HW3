@@ -24,13 +24,11 @@ def electric_field_single_charge(q, r_vector):
     tuple: The electric field vector (Ex, Ey) in N/C
     """
     r_mag = magnitude(r_vector)  # Calculate the magnitude of the separation vector
-    
     if r_mag == 0:
         raise ValueError("The point cannot be located at the same position as the charge.")
 
     # Electric field magnitude
     E_magnitude = k * q / r_mag**2
-    
     # Unit vector in the direction of r_vector
     unit_vector = (r_vector[0] / r_mag, r_vector[1] / r_mag)
 
@@ -57,7 +55,6 @@ def net_electric_field(charges_positions, point_position):
             charge[0], separation_vector(point_position, charge[1])
         ), charges_positions
     )
-    
     # List comprehension to gather x and y components of electric fields from all charges
     fields_x = [field[0] for field in fields]
     fields_y = [field[1] for field in fields]
@@ -73,5 +70,3 @@ if __name__ == "__main__":
     target_point = (0, 0)
     net_field = net_electric_field(charges_positions_list, target_point)
     print(f"Net electric field at point {target_point}: Ex = {net_field[0]:.2e} N/C, Ey = {net_field[1]:.2e} N/C")
-
-    
