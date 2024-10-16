@@ -48,8 +48,8 @@ def inside(r,v1):
 
 def get_field_mag(cd,r,m):
     """getFieldMag returns the magnitude of the electric field"""
-    eps=8.85*10**-12
-    return get_qe()(cd,r)/(eps*get_area()(m))
+    EPS=8.85*10**-12
+    return get_qe()(cd,r)/(EPS*get_area()(m))
 
 def zero_condition(v1):
     """zeroCondition returns a list with a number of elements 
