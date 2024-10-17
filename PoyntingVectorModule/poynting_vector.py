@@ -20,7 +20,7 @@ def electric_field_expression(e_0, wave_vector, delta, f, polarisation):
 
     n_hat = sp.Matrix(polarisation_normalised)
     # generating the normalised polarisation vector
-     
+    
     k_dot_r = r.dot(k)
 
     return e_0 * sp.cos(k_dot_r - omega * t + delta) * n_hat.T
@@ -49,7 +49,7 @@ def magnetic_field_expression(e_0, wave_vector, delta, f, polarisation):
     # returning the magnetic field in algebraic form
 
 def poynting_vector_expression(e, b):
-    # function to calculte poynting vector expression
+    # function to calculate poynting vector expression
     mu = sp.symbols('mu')
     pv = (1/mu) * e.cross(b)
     # obtaining the algebraic expression for Poynting Vector
@@ -58,7 +58,7 @@ def poynting_vector_expression(e, b):
 def poynting_vector_value(e, b, position, time):
     # function to caculate poynting vector value
     pv = poynting_vector_expression(e, b)
-    return pv.subs({'x': position[0], 'y': position[1], 'z': position[2], 
+    return pv.subs({'x': position[0], 'y': position[1], 'z': position[2],
                     't': time, 'c' : 299792458, 'mu' : 0.00000125663}).evalf()
     # returning the numeric value for Poynting Vector
 
