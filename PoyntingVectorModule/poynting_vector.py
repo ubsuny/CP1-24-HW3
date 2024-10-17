@@ -16,22 +16,17 @@ def electric_field_expression(e_0, wave_vector, delta, f, polarisation):    # ge
 
     polarisation_normalised = list(map(lambda a: a / norm_polarisation, polarisation))
     # normalising the polarisaion vector using map and lamda function
-
     n_hat = sp.Matrix(polarisation_normalised)
     # generating the normalised polarisation vector
-    
     k_dot_r = r.dot(k)
-
     return e_0 * sp.cos(k_dot_r - omega * t + delta) * n_hat.T
     # returning the Electric Field in algebraic form
 
 def magnetic_field_expression(e_0, wave_vector, delta, f, polarisation):    # generates Magnetic Field
     c, t, x, y, z = sp.symbols('c t x y z')
     omega = 2 * sp.pi * f
-
     r = sp.Matrix([x, y, z])
     k = sp.Matrix(wave_vector)
-
     norm_polarisation = np.linalg.norm(polarisation)
     polarisation_normalised = list(map(lambda a: a / norm_polarisation, polarisation))
     norm_k = np.linalg.norm(wave_vector)
