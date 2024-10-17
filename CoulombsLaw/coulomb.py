@@ -14,12 +14,12 @@ def calculate_electric_force(q1, q2, r):
     Calculate the electric force between two point charges using Coulomb's law.
 
     Args:
-    q1 (float): The first charge in coulombs (C).
-    q2 (float): The second charge in coulombs (C).
-    r (float): The distance between the charges in meters (m).
+    q1: The first charge in coulombs (C).
+    q2: The second charge in coulombs (C).
+    r: The distance between the charges in meters (m).
     
     Returns:
-    float: The calculated electric force in newtons (N),
+    The calculated electric force in newtons (N),
     or prints a message if the distance is zero.
     
     If the distance between the charges is zero, the function will print an error message 
