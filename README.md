@@ -45,7 +45,7 @@ Also use discord for discussing solutions to any issues popping up.
 | Interaction on project           |                |              |            |
 | Category                         | min per person | point factor | max points |
 | Commits                          | 1              | 1            | 1          |
-| Pull requests                    | 1              | 1            | 3          |
+| Pull requests                    | 1              | 3            | 3          |
 | PR Accepted                      | 1              | 4            | 4          |
 | Other PR reviewed                | 1              | 3            | 3          |     
 | Issues                           | 5              | 1/5          | 1          | 
@@ -55,7 +55,7 @@ Also use discord for discussing solutions to any issues popping up.
 | Total                            |                |              | 18         |
 |                                  |                |              |            |
 | Shared project points            |                |              |            |
-| \# Milestones                    | 18             | 1/6          | 3          |
+| \# Milestones                    | 15             | 1/5          | 3          |
 |                                  |                |              |            |
 | Total                            |                |              | 21         |
 |                                  |                |              |            |
