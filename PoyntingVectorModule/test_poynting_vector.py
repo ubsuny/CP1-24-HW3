@@ -7,9 +7,11 @@ import sympy as sp
 # importing all functions from PoyntingVector module
 from poynting_vector import poynting_vector_value, poynting_vector_magnitude
 
-class PoyntingVectorTest(unittest.TestCase):    # class for the unitest functions
+class PoyntingVectorTest(unittest.TestCase):
+    # class for the unitest functions
 
-    def test_poynting_vector_value(self):   # testing poynting_vector_value
+    def test_poynting_vector_value(self):
+        # testing poynting_vector_value
         e = sp.Matrix([1.0, 0.0, 0.0]).T
         b = sp.Matrix([0.0, 1.0, 0.0]).T
         position = [0.0, 0.0, 0.0]
@@ -23,7 +25,8 @@ class PoyntingVectorTest(unittest.TestCase):    # class for the unitest function
 
         assert pv_num[0] == answer_direction[0]
 
-    def test_poynting_vector_magnitude(self):   # testing poynting_vector_magnitude
+    def test_poynting_vector_magnitude(self):
+        # testing poynting_vector_magnitude
         pv = [3.0, 4.0, 0.0]
 
         pv_mag = poynting_vector_magnitude(pv)
