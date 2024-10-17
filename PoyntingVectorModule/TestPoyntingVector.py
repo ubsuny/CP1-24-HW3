@@ -1,7 +1,6 @@
 '''
 This module runs the unittest for the functions in PoyntingVector.py module 
 '''
-import math
 import unittest
 import sympy as sp
 

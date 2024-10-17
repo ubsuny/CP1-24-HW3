@@ -1,9 +1,9 @@
 '''
 This module calculates the PoyntingVector for a given electromagnetic wave
 '''
+import math
 import numpy as np
 import sympy as sp
-import math
 
 def electric_field_expression(e_0, wave_vector, delta, f, polarisation):
     # function to generate the Electric Field expression
@@ -14,19 +14,20 @@ def electric_field_expression(e_0, wave_vector, delta, f, polarisation):
     k = sp.Matrix(wave_vector)  # generating the wave vector
 
     norm_polarisation = np.linalg.norm(polarisation)    # norm of the polarisation vector
-    
+
     polarisation_normalised = list(map(lambda a: a / norm_polarisation, polarisation))
     # normalising the polarisaion vector using map and lamda function
 
     n_hat = sp.Matrix(polarisation_normalised)
     # generating the normalised polarisation vector
-
-    k_dot_r = r.dot(k) 
+     
+    k_dot_r = r.dot(k)
 
     return e_0 * sp.cos(k_dot_r - omega * t + delta) * n_hat.T
     # returning the Electric Field in algebraic form
 
 def magnetic_field_expression(e_0, wave_vector, delta, f, polarisation):
+    # function to generate the magnetic field expression
     c, t, x, y, z = sp.symbols('c t x y z')
     omega = 2 * sp.pi * f
 
@@ -37,7 +38,7 @@ def magnetic_field_expression(e_0, wave_vector, delta, f, polarisation):
     polarisation_normalised = list(map(lambda a: a / norm_polarisation, polarisation))
     norm_k = np.linalg.norm(wave_vector)
     k_normalised = list(map(lambda a: a / norm_k, wave_vector))
-    
+
     n_hat = sp.Matrix(polarisation_normalised)
     k_hat = sp.Matrix(k_normalised)
 
@@ -48,17 +49,20 @@ def magnetic_field_expression(e_0, wave_vector, delta, f, polarisation):
     # returning the magnetic field in algebraic form
 
 def poynting_vector_expression(e, b):
+    # function to calculte poynting vector expression
     mu = sp.symbols('mu')
-
     pv = (1/mu) * e.cross(b)
     # obtaining the algebraic expression for Poynting Vector
-    
     return pv
 
 def poynting_vector_value(e, b, position, time):
+    # function to caculate poynting vector value
     pv = poynting_vector_expression(e, b)
-    return pv.subs({'x': position[0], 'y': position[1], 'z': position[2], 't': time, 'c' : 299792458, 'mu' : 0.00000125663}).evalf()
+    return pv.subs({'x': position[0], 'y': position[1], 'z': position[2], 
+                    't': time, 'c' : 299792458, 'mu' : 0.00000125663}).evalf()
     # returning the numeric value for Poynting Vector
 
 def poynting_vector_magnitude(pv):
-    return math.sqrt(pv[0] ** 2 + pv[1] ** 2 + pv[2] ** 2)  # returning the magnitude of Poynting Vector
+    # function to calculate poynting vector magitude
+    return math.sqrt(pv[0] ** 2 + pv[1] ** 2 + pv[2] ** 2)
+    # returning the magnitude of Poynting Vector
