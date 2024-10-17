@@ -21,5 +21,4 @@ def sigma(R, V, epsilon_0 = 8.854*(10**(-12))):
     Returns:
     number: the surface charge density
     """
-    Sigma = lambda epsilon_00, V0, R0: mult(epsilon_00, div(V0, R0)) 
-    return Sigma(epsilon_0, V, R)
+    return mult(epsilon_0, div(V, R))
