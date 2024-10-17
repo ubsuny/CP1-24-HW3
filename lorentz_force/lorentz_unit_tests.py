@@ -9,7 +9,8 @@ def test_lorentz_force_at_90_degrees():
     angle_radians = math.pi / 2  # 90 degrees
 
     expected_force = charge * velocity * magnetic_field
-    assert math.isclose(lorentz_force(charge, velocity, magnetic_field, angle_radians), expected_force)
+    assert math.isclose(lorentz_force(
+        charge, velocity, magnetic_field, angle_radians), expected_force)
 
 
 def test_lorentz_force_at_0_degrees():
@@ -20,7 +21,8 @@ def test_lorentz_force_at_0_degrees():
     angle_radians = 0  # 0 degrees
 
     expected_force = 0  # sin(0) is 0
-    assert math.isclose(lorentz_force(charge, velocity, magnetic_field, angle_radians), expected_force)
+    assert math.isclose(lorentz_force(
+        charge, velocity, magnetic_field, angle_radians), expected_force)
 
 
 def test_lorentz_force_with_zero_charge():
@@ -31,7 +33,8 @@ def test_lorentz_force_with_zero_charge():
     angle_radians = math.pi / 2  # 90 degrees
 
     expected_force = 0
-    assert math.isclose(lorentz_force(charge, velocity, magnetic_field, angle_radians), expected_force)
+    assert math.isclose(lorentz_force(
+        charge, velocity, magnetic_field, angle_radians), expected_force)
 
 
 def test_lorentz_force_with_zero_velocity():
@@ -42,7 +45,8 @@ def test_lorentz_force_with_zero_velocity():
     angle_radians = math.pi / 2  # 90 degrees
 
     expected_force = 0
-    assert math.isclose(lorentz_force(charge, velocity, magnetic_field, angle_radians), expected_force)
+    assert math.isclose(lorentz_force(
+        charge, velocity, magnetic_field, angle_radians), expected_force)
 
 
 def test_lorentz_force_with_zero_magnetic_field():
@@ -53,7 +57,8 @@ def test_lorentz_force_with_zero_magnetic_field():
     angle_radians = math.pi / 2  # 90 degrees
 
     expected_force = 0
-    assert math.isclose(lorentz_force(charge, velocity, magnetic_field, angle_radians), expected_force)
+    assert math.isclose(lorentz_force(
+        charge, velocity, magnetic_field, angle_radians), expected_force)
 
 
 def test_lorentz_force_with_negative_charge():
@@ -64,7 +69,8 @@ def test_lorentz_force_with_negative_charge():
     angle_radians = math.pi / 2  # 90 degrees
 
     expected_force = charge * velocity * magnetic_field  # Should be negative
-    assert math.isclose(lorentz_force(charge, velocity, magnetic_field, angle_radians), expected_force)
+    assert math.isclose(lorentz_force(
+        charge, velocity, magnetic_field, angle_radians), expected_force)
 
 
 def test_lorentz_force_with_negative_magnetic_field():
@@ -75,4 +81,5 @@ def test_lorentz_force_with_negative_magnetic_field():
     angle_radians = math.pi / 2  # 90 degrees
 
     expected_force = charge * velocity * magnetic_field  # Should be negative
-    assert math.isclose(lorentz_force(charge, velocity, magnetic_field, angle_radians), expected_force)
+    assert math.isclose(lorentz_force(
+        charge, velocity, magnetic_field, angle_radians), expected_force)
