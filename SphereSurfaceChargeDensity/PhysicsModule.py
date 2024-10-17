@@ -8,7 +8,7 @@ The specifications needed for the shell:
 
 Considering the units used, the default system will be the metric system.
 However, it will be flexible to convert to other systems by manually choosing the inpus' units.
-A constant value of \epsilon_0 is thus set by default to the units of the metric system.
+A constant value of (epsilon_0) is thus set by default to the units of the metric system.
 """
 
 from MathOpsModule import *
