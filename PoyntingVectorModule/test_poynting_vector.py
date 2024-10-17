@@ -5,7 +5,7 @@ import unittest
 import sympy as sp
 
 # importing all functions from PoyntingVector module
-from PoyntingVector import poynting_vector_value, poynting_vector_magnitude
+from poynting_vector import poynting_vector_value, poynting_vector_magnitude
 
 class PoyntingVectorTest(unittest.TestCase):
     # this class implements the unitest functions
