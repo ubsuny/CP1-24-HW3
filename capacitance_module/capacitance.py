@@ -20,8 +20,6 @@ The module also handles special cases such as calculating parasitic capacitance,
 which can affect the overall performance of high-frequency circuits.
 """
 
-import math
-
 # Constant: Permittivity of free space (F/m)
 EPSILON_0 = 8.854e-12
 
