@@ -4,9 +4,9 @@ def div(numerator, denominator):
     """
     Returns the result of dividing two numbers
     Parameters:
-    numerator (float), denominator (float): input numbers
+    numerator, denominator: input numbers
     Returns:
-    number (float): The result of dividing the first number by the second number utilizing the lambda expression
+    number: The result of dividing the first number by the second number utilizing the lambda expression
     """
     Div = lambda x, y: x/y
     return Div(numerator, denominator)
@@ -15,9 +15,9 @@ def mult(x, y):
     """
     Returns the result of dividing two numbers
     Parameters:
-    x (float), y (float): input numbers
+    x, y: input numbers
     Returns:
-    number (float): The result of multiplying the two numbers utilizing the lambda expression
+    number: The result of multiplying the two numbers utilizing the lambda expression
     """
     Mult = lambda xx, yy: xx*yy
     return Mult(x, y)
