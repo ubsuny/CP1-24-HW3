@@ -1,50 +1,78 @@
-"""
-Module to test lorentz_force.py
-"""
-
 import math
 from lorentz_force import lorentz_force
 
 def test_lorentz_force_at_90_degrees():
-    """
-    Test case where the angle between velocity and magnetic field is 90 degrees (π/2 radians).
-    The sin(90 degrees) is 1, so the force should be maximized.
-    """
-    charge = 1.6e-19  # Charge in Coulombs
-    velocity = 2e6    # Velocity in m/s
-    magnetic_field = 0.01  # Magnetic field in Tesla
+    """Test when angle between velocity and magnetic field is 90 degrees."""
+    charge = 1.6e-19  # Coulombs
+    velocity = 2e6  # m/s
+    magnetic_field = 0.01  # Tesla
     angle_radians = math.pi / 2  # 90 degrees
 
-    expected_force = charge * velocity * magnetic_field  # sin(90 degrees) is 1
-    assert math.isclose(lorentz_force(
-        charge, velocity, magnetic_field, angle_radians), expected_force)
+    expected_force = charge * velocity * magnetic_field
+    assert math.isclose(lorentz_force(charge, velocity, magnetic_field, angle_radians), expected_force)
 
 
 def test_lorentz_force_at_0_degrees():
-    """
-    Test case where the angle between velocity and magnetic field is 0 degrees.
-    The sin(0 degrees) is 0, so the force should be zero.
-    """
-    charge = 1.6e-19  # Charge in Coulombs
-    velocity = 2e6    # Velocity in m/s
-    magnetic_field = 0.01  # Magnetic field in Tesla
+    """Test when angle between velocity and magnetic field is 0 degrees."""
+    charge = 1.6e-19  # Coulombs
+    velocity = 2e6  # m/s
+    magnetic_field = 0.01  # Tesla
     angle_radians = 0  # 0 degrees
 
-    expected_force = 0  # sin(0 degrees) is 0
-    assert math.isclose(lorentz_force(
-        charge, velocity, magnetic_field, angle_radians), expected_force)
+    expected_force = 0  # sin(0) is 0
+    assert math.isclose(lorentz_force(charge, velocity, magnetic_field, angle_radians), expected_force)
 
 
-def test_lorentz_force_at_45_degrees():
-    """
-    Test case where the angle between velocity and magnetic field is 45 degrees (π/4 radians).
-    The sin(45 degrees) is sqrt(2)/2.
-    """
-    charge = 1.6e-19  # Charge in Coulombs
-    velocity = 2e6    # Velocity in m/s
-    magnetic_field = 0.01  # Magnetic field in Tesla
-    angle_radians = math.pi / 4  # 45 degrees
+def test_lorentz_force_with_zero_charge():
+    """Test when charge is zero."""
+    charge = 0  # Coulombs
+    velocity = 2e6  # m/s
+    magnetic_field = 0.01  # Tesla
+    angle_radians = math.pi / 2  # 90 degrees
 
-    expected_force = charge * velocity * magnetic_field * math.sin(angle_radians)
-    assert math.isclose(lorentz_force(
-        charge, velocity, magnetic_field, angle_radians), expected_force)
+    expected_force = 0
+    assert math.isclose(lorentz_force(charge, velocity, magnetic_field, angle_radians), expected_force)
+
+
+def test_lorentz_force_with_zero_velocity():
+    """Test when velocity is zero."""
+    charge = 1.6e-19  # Coulombs
+    velocity = 0  # m/s
+    magnetic_field = 0.01  # Tesla
+    angle_radians = math.pi / 2  # 90 degrees
+
+    expected_force = 0
+    assert math.isclose(lorentz_force(charge, velocity, magnetic_field, angle_radians), expected_force)
+
+
+def test_lorentz_force_with_zero_magnetic_field():
+    """Test when magnetic field is zero."""
+    charge = 1.6e-19  # Coulombs
+    velocity = 2e6  # m/s
+    magnetic_field = 0  # Tesla
+    angle_radians = math.pi / 2  # 90 degrees
+
+    expected_force = 0
+    aassert math.isclose(lorentz_force(charge, velocity, magnetic_field, angle_radians), expected_force)
+
+
+def test_lorentz_force_with_negative_charge():
+    """Test with a negative charge."""
+    charge = -1.6e-19  # Coulombs (electron)
+    velocity = 2e6  # m/s
+    magnetic_field = 0.01  # Tesla
+    angle_radians = math.pi / 2  # 90 degrees
+
+    expected_force = charge * velocity * magnetic_field  # Should be negative
+    assert math.isclose(lorentz_force(charge, velocity, magnetic_field, angle_radians), expected_force)
+
+
+def test_lorentz_force_with_negative_magnetic_field():
+    """Test with a negative magnetic field."""
+    charge = 1.6e-19  # Coulombs
+    velocity = 2e6  # m/s
+    magnetic_field = -0.01  # Tesla
+    angle_radians = math.pi / 2  # 90 degrees
+
+    expected_force = charge * velocity * magnetic_field  # Should be negative
+    assert math.isclose(lorentz_force(charge, velocity, magnetic_field, angle_radians), expected_force)
