@@ -42,10 +42,33 @@ $$\tilde{k}=k+i \kappa ,$$
 
 where the **real wavenumber** $k$ is:
 
-$$k \equiv \omega \sqrt{\frac{\epsilon \mu}{2}}\left[\sqrt{1+\left(\frac{\sigma}{\epsilon \omega}\right)^2}+1\right]^{1 / 2}$$,
+$$k \equiv \omega \sqrt{\frac{\epsilon \mu}{2}}\left[\sqrt{1+\left(\frac{\sigma}{\epsilon \omega}\right)^2}+1\right]^{1 / 2}$$
 
 and the **attenuation constant** $\kappa$ is:
 
-$$k \equiv \omega \sqrt{\frac{\epsilon \mu}{2}}\left[\sqrt{1+\left(\frac{\sigma}{\epsilon \omega}\right)^2}-1\right]^{1 / 2}$$,
+$$k \equiv \omega \sqrt{\frac{\epsilon \mu}{2}}\left[\sqrt{1+\left(\frac{\sigma}{\epsilon \omega}\right)^2}-1\right]^{1 / 2}$$
 
+The imaginary part of $\tilde{k}$ leads to the attenuation of the wave inside the conductor:
+
+$$\tilde{\mathbf{E}}(z, t)=\tilde{\mathbf{E}}_0 e^{-\kappa z} e^{i(k z-\omega t)},$$ 
+
+$$\tilde{\mathbf{B}}(z, t)=\tilde{\mathbf{B}}_0 e^{-\kappa z} e^{i(k z-\omega t)},$$ 
+
+The distance the wave travels before its amplitude gets reduced by a factor of $1/e$ is called the **skin depth** and is defined as:
+
+$$d \equiv \frac{1}{\kappa}$$
+
+Moreover, the $\vec{E}$ and $\vec{B}$ fields no longer remain in phase as the wave passes through a conductor, with 
+
+$$\delta_B-\delta_E=\phi $$
+
+where 
+
+$$\phi \equiv \tan ^{-1}(\kappa / k)$$
+
+is defined as the **phase shift**.
+
+
+
+Reference: [1] Griffiths D.J, Introduction to Electrodynamics (4th Ed)
 
