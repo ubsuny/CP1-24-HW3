@@ -15,3 +15,16 @@ metals = {"Gold": 4.52e7,
     "Iron": 1.04e7,   
     "Nichrome": 9.26e5, 
     "Manganese": 6.94e5}
+
+def omega(wavelength):
+    """
+    Calculate angular frequency from wavelength.
+
+    Parameters:
+        wavelength (float): The wavelength in meters.
+
+    Returns:
+        float: The angular frequency in radians per second.
+    """
+    return 2 * math.pi * c / wavelength
+
