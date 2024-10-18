@@ -44,3 +44,14 @@ def calculate_properties(wavelength, metal_type):
             - phase_shift (float): Phase shift in degrees.
             - characteristic_time (float): Characteristic time in seconds.
     """
+
+    # Validate the wavelength
+    if wavelength <= 0:
+        raise ValueError("Wavelength must be a positive number.")
+
+    # Get conductivity for the selected metal
+    sigma = metals[metal_type]
+    
+    # Calculate angular frequency
+    omega_value = omega(wavelength)
+
