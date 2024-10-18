@@ -28,3 +28,19 @@ def omega(wavelength):
     """
     return 2 * math.pi * c / wavelength
 
+def calculate_properties(wavelength, metal_type):
+    """
+    Calculate electromagnetic properties based on wavelength and metal type.
+
+    Parameters:
+        wavelength (float): The wavelength in meters.
+        metal_type (str): The type of metal (must be a key in the metals dictionary).
+
+    Returns:
+        tuple: A tuple containing:
+            - k (float): Wave number (1/m).
+            - kappa (float): Attenuation constant (1/m).
+            - skin_depth (float): Skin depth in meters.
+            - phase_shift (float): Phase shift in degrees.
+            - characteristic_time (float): Characteristic time in seconds.
+    """
