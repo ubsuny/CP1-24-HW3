@@ -22,3 +22,30 @@ Once any accumulated charges have disappeared, Maxwell's equations are simplifie
 
 4. $$\nabla \times \mathbf{B} = \mu \sigma \mathbf{E} + \mu \epsilon \frac{\partial \mathbf{E}}{\partial t}$$
 
+Applying the curl to (2) and (4), we obtain the wave equations for $\vec{E}$ and $\vec{B}$:
+
+$$\nabla^2 \mathbf{E}=\mu \epsilon \frac{\partial^2 \mathbf{E}}{\partial t^2}+\mu \sigma \frac{\partial \mathbf{E}}{\partial t},$$ $$\quad \nabla^2 \mathbf{B}=\mu \epsilon \frac{\partial^2 \mathbf{B}}{\partial t^2}+\mu \sigma \frac{\partial \mathbf{B}}{\partial t}$$
+
+which admit plane wave solutions of the form
+
+$$\tilde{\mathbf{E}}(z, t)=\tilde{\mathbf{E}}_0 e^{i(\tilde{k} z-\omega t)},$$
+
+$$\tilde{\mathbf{B}}(z, t)=\tilde{\mathbf{B}}_0 e^{i(\tilde{k} z-\omega t)},$$
+
+with a complex wavenumber 
+
+$$\tilde{k}^2=\mu \epsilon \omega^2+i \mu \sigma \omega$$
+
+Taking the square root, we can write:
+
+$$\tilde{k}=k+i \kappa ,$$
+
+where the **real wavenumber** $k$ is:
+
+$$k \equiv \omega \sqrt{\frac{\epsilon \mu}{2}}\left[\sqrt{1+\left(\frac{\sigma}{\epsilon \omega}\right)^2}+1\right]^{1 / 2}$$,
+
+and the **attenuation constant** $\kappa$ is:
+
+$$k \equiv \omega \sqrt{\frac{\epsilon \mu}{2}}\left[\sqrt{1+\left(\frac{\sigma}{\epsilon \omega}\right)^2}-1\right]^{1 / 2}$$,
+
+
