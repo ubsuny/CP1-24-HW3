@@ -1,3 +1,21 @@
+"""
+This is a console program that outputs the electromagnetic properties of various metals based on input wavelengths
+in free space. It utilizes the conductivity values for 8 different metals at standard conditions (1 atm, 20 °C).
+
+The following properties are computed for a given pair of wavelength and metal:
+
+- Wave number (k)
+- Attenuation constant (kappa)
+- Skin depth
+- Phase shift
+- Characteristic time
+
+Refer to the EM_In_Conductors.md file for a detailed discussion of the aforementioned quantities.
+
+The user is prompted to enter wavelengths and metal names, and the program outputs the calculated
+properties for each valid combination.
+"""
+
 import math
 
 # Constants
@@ -28,13 +46,13 @@ def omega(wavelength):
     """
     return 2 * math.pi * c / wavelength
 
-def calculate_properties(wavelength, metal_type):
+def calculate_properties(wavelength, metal):
     """
-    Calculate electromagnetic properties based on wavelength and metal type.
+    Calculate electromagnetic properties based on wavelength and metal.
 
     Parameters:
         wavelength (float): The wavelength in meters.
-        metal_type (str): The type of metal (must be a key in the metals dictionary).
+        metal (str): The name of metal (must be a key in the metals dictionary).
 
     Returns:
         tuple: A tuple containing:
@@ -50,7 +68,7 @@ def calculate_properties(wavelength, metal_type):
         raise ValueError("Wavelength must be a positive number.")
 
     # Get conductivity for the selected metal
-    sigma = metals[metal_type]
+    sigma = metals[metal]
     
     # Calculate angular frequency
     omega_value = omega(wavelength)
@@ -98,7 +116,7 @@ def main():
     """
     Main function to execute the program.
 
-    It prompts the user for wavelengths and metal types, validates the input,
+    It prompts the user for wavelengths and metal names, validates the input,
     calculates the electromagnetic properties for the valid combinations,
     and displays the results.
     """
@@ -108,27 +126,27 @@ def main():
     # Convert wavelengths input (list of strings) to a list of floats using map
     wavelengths = list(map(float, wavelengths_input))
     
-    # Input: Metal types
-    metal_types = input("Enter metal types (comma-separated from 'Gold', 'Aluminum', 'Mercury', 'Copper', 'Silver', 'Iron', 'Nichrome', 'Manganese'): ").split(",")
+    # Input: Metal Names
+    metals = input("Enter metal names (comma-separated from 'Gold', 'Aluminum', 'Mercury', 'Copper', 'Silver', 'Iron', 'Nichrome', 'Manganese'): ").split(",")
     
     # Clean up the input by removing any whitespaces
-    metal_types = [str(m.strip()) for m in metal_types]
+    metals = [str(m.strip()) for m in metals]
     
-    # Filter/Validate metal types
-    filter_metal_types = filter(lambda m: m in metal_types and m in metals, metal_types)
+    # Filter/Validate metal names
+    filter_metals = filter(lambda m: m in metals and m in metals, metals)
     
     # Convert filter output to list
-    valid_metal_types = list(filter_metal_types)
+    valid_metals = list(filter_metals)
 
-    # Compute the results for each combination of wavelength and metal type using list comprehension
-    results = [(wavelength, metal_type, *calculate_properties(wavelength, metal_type))
+    # Compute the results for each combination of wavelength and metal using list comprehension
+    results = [(wavelength, metal, *calculate_properties(wavelength, metal))
                for wavelength in wavelengths
-               for metal_type in valid_metal_types]
+               for metal in valid_metals]
 
     # Display the results
-    for wavelength, metal_type, k, kappa, skin_depth, phase_shift, characteristic_time in results:
+    for wavelength, metal, k, kappa, skin_depth, phase_shift, characteristic_time in results:
         print("-----------------------------------------------------------------------------------------------------")
-        print("Results for " + metal_type + " with wavelength " + str(wavelength) + " meters:")
+        print("Results for " + metal + " with wavelength " + str(wavelength) + " meters:")
         print("Wave number (k): " + str(k) + " 1/m")
         print("Attenuation constant (kappa): " + str(kappa) + " 1/m")
         print("Skin Depth: " +  str(skin_depth) + " meters")
