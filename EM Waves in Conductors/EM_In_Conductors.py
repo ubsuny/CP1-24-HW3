@@ -135,3 +135,6 @@ def main():
         print("Phase Shift: " + str(phase_shift) + " degrees")
         print("Characteristic Time: " + str(characteristic_time) + " seconds")
         print("-----------------------------------------------------------------------------------------------------")
+
+if __name__ == "__main__":
+    main()
