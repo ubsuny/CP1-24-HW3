@@ -94,4 +94,44 @@ def calculate_properties(wavelength, metal_type):
 
     return k, kappa, skin_depth, phase_shift, characteristic_time
 
+def main():
+    """
+    Main function to execute the program.
 
+    It prompts the user for wavelengths and metal types, validates the input,
+    calculates the electromagnetic properties for the valid combinations,
+    and displays the results.
+    """
+    # Input: Wavelengths
+    wavelengths_input = input("Enter free space wavelengths (comma-separated, in meters): ").split(",")
+    
+    # Convert wavelengths input (list of strings) to a list of floats using map
+    wavelengths = list(map(float, wavelengths_input))
+    
+    # Input: Metal types
+    metal_types = input("Enter metal types (comma-separated from 'Gold', 'Aluminum', 'Mercury', 'Copper', 'Silver', 'Iron', 'Nichrome', 'Manganese'): ").split(",")
+    
+    # Clean up the input by removing any whitespaces
+    metal_types = [str(m.strip()) for m in metal_types]
+    
+    # Filter/Validate metal types
+    filter_metal_types = filter(lambda m: m in metal_types and m in metals, metal_types)
+    
+    # Convert filter output to list
+    valid_metal_types = list(filter_metal_types)
+
+    # Compute the results for each combination of wavelength and metal type using list comprehension
+    results = [(wavelength, metal_type, *calculate_properties(wavelength, metal_type))
+               for wavelength in wavelengths
+               for metal_type in valid_metal_types]
+
+    # Display the results
+    for wavelength, metal_type, k, kappa, skin_depth, phase_shift, characteristic_time in results:
+        print("-----------------------------------------------------------------------------------------------------")
+        print("Results for " + metal_type + " with wavelength " + str(wavelength) + " meters:")
+        print("Wave number (k): " + str(k) + " 1/m")
+        print("Attenuation constant (kappa): " + str(kappa) + " 1/m")
+        print("Skin Depth: " +  str(skin_depth) + " meters")
+        print("Phase Shift: " + str(phase_shift) + " degrees")
+        print("Characteristic Time: " + str(characteristic_time) + " seconds")
+        print("-----------------------------------------------------------------------------------------------------")
