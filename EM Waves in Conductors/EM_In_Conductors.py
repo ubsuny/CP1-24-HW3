@@ -54,4 +54,30 @@ def calculate_properties(wavelength, metal_type):
     
     # Calculate angular frequency
     omega_value = omega(wavelength)
+    
+    def k_kappa(omega, sigma, epsilon, mu):  # This can be used to work out k and kappa in different media
+        """
+        Calculate wave number (k) and attenuation constant (kappa).
+
+        Parameters:
+            omega (float): Angular frequency.
+            sigma (float): Conductivity of the metal.
+            epsilon (float): Permittivity of medium.
+            mu (float): Permeability of medium.
+
+        Returns:
+            tuple: A tuple containing:
+                - k (float): Wave number (1/m).
+                - kappa (float): Attenuation constant (1/m).
+        """
+        term = (sigma / (epsilon * omega)) ** 2
+        factor = omega * math.sqrt(epsilon * mu / 2)
+        
+        # Griffiths D.J, Introduction to Electrodynamics (4th Ed) - Equation 9.126
+        k = factor * math.sqrt(math.sqrt(1 + term) + 1)   
+        kappa = factor * math.sqrt(math.sqrt(1 + term) - 1)
+        
+        
+        return k, kappa
+
 
