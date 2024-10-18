@@ -80,4 +80,18 @@ def calculate_properties(wavelength, metal_type):
         
         return k, kappa
 
+    # Compute k and kappa for FREE SPACE. Note that we can change our code here to include dielectrics
+    k, kappa = k_kappa(omega_value, sigma, epsilon_0, mu_0)
+
+    # Skin Depth (1/kappa)
+    skin_depth = 1 / kappa
+
+    # Phase shift (arctan(kappa/k) in degrees)
+    phase_shift = math.degrees(math.atan(kappa / k))
+    
+    # Characteristic time calculation
+    characteristic_time = epsilon_0 / sigma
+
+    return k, kappa, skin_depth, phase_shift, characteristic_time
+
 
